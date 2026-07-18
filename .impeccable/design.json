@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-13T00:00:00Z",
+  "title": "Design System: АНКУВЕР",
+  "extensions": {
+    "colorMeta": {
+      "sanitary-blue": {
+        "role": "primary",
+        "displayName": "Санитарный синий (Sanitary Blue)",
+        "canonical": "#14406e",
+        "tonalRamp": ["#071527", "#0b2340", "#103356", "#14406e", "#1b5391", "#3e6ea6", "#7b9cc4", "#c3d4e6"]
+      },
+      "action-green": {
+        "role": "secondary",
+        "displayName": "Action Green",
+        "canonical": "#2f9e5c",
+        "tonalRamp": ["#0c2b19", "#14472a", "#1d693e", "#23824a", "#2f9e5c", "#57b57d", "#8fd0a8", "#cfeadb"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#16293c",
+        "tonalRamp": ["#090f17", "#101d2b", "#16293c", "#2c4157", "#55687c", "#8494a5", "#b4c0cc", "#e2e8ee"]
+      },
+      "washed-blue": {
+        "role": "neutral",
+        "displayName": "Washed Blue",
+        "canonical": "#eaf1f8",
+        "tonalRamp": ["#c3d4e6", "#d7e0ea", "#e1eaf3", "#eaf1f8", "#f1f6fb", "#f6f9fc", "#fafcfe", "#ffffff"]
+      },
+      "zone-red": { "role": "tertiary", "displayName": "Zone Red — high-risk areas", "canonical": "#c0392b", "tonalRamp": ["#7a2015", "#c0392b", "#e08a80"] },
+      "zone-blue": { "role": "tertiary", "displayName": "Zone Blue — general areas", "canonical": "#2b6cb0", "tonalRamp": ["#1a4570", "#2b6cb0", "#8ab3dc"] },
+      "zone-green": { "role": "tertiary", "displayName": "Zone Green — food-prep areas", "canonical": "#2f9e5c", "tonalRamp": ["#1d693e", "#2f9e5c", "#8fd0a8"] },
+      "zone-yellow": { "role": "tertiary", "displayName": "Zone Yellow — sanitary rooms", "canonical": "#d6a324", "tonalRamp": ["#8f6c14", "#d6a324", "#ecd28f"] },
+      "zone-white": { "role": "tertiary", "displayName": "Zone White — bakeries, confectionery", "canonical": "#e9e7dd", "tonalRamp": ["#c9c6b8", "#e9e7dd", "#f7f6f1"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero H1 only — Oswald 600 uppercase, white on Sanitary Blue." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2s, uppercase." },
+      "title": { "displayName": "Title", "purpose": "Card H3s, uppercase." },
+      "body": { "displayName": "Body", "purpose": "IBM Plex Sans paragraphs, 15–17px, line-height 1.55." },
+      "label": { "displayName": "Marking", "purpose": "IBM Plex Mono uppercase micro-labels: kickers, buttons, form labels." }
+    },
+    "shadows": [
+      { "name": "hover-lift", "value": "0 12px 28px rgba(20,64,110,0.12)", "purpose": "Interactive cards on hover only, paired with translateY(-4px). No resting shadows anywhere." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "0.15s ease", "purpose": "Link colors, button presses." },
+      { "name": "state-standard", "value": "0.2s ease", "purpose": "Button fills, card hover lift." },
+      { "name": "key-turn", "value": "0.4s cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Logomark key rotation on logo hover; disabled under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "560px" },
+      { "name": "tablet", "value": "800px" },
+      { "name": "nav-collapse", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Green)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The conversion button — catalog and KP requests.",
+      "html": "<button class=\"ds-btn-green\">Получить каталог</button>",
+      "css": ".ds-btn-green { display: inline-flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 15px 28px; border-radius: 3px; border: 1px solid transparent; cursor: pointer; background: #2f9e5c; color: #fff; transition: transform 0.15s ease, background 0.2s ease; } .ds-btn-green:hover { background: #23824a; } .ds-btn-green:active { transform: translateY(1px); } .ds-btn-green:focus-visible { outline: 2px solid #14406e; outline-offset: 2px; }"
+    },
+    {
+      "name": "Nav Button (Blue)",
+      "kind": "button",
+      "refersTo": "button-blue",
+      "description": "Header CTA and secondary emphasis on light surfaces.",
+      "html": "<button class=\"ds-btn-blue\">Получить каталог</button>",
+      "css": ".ds-btn-blue { display: inline-flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 15px 28px; border-radius: 3px; border: 1px solid transparent; cursor: pointer; background: #14406e; color: #fff; transition: transform 0.15s ease, background 0.2s ease; } .ds-btn-blue:hover { background: #1b5391; } .ds-btn-blue:active { transform: translateY(1px); } .ds-btn-blue:focus-visible { outline: 2px solid #2f9e5c; outline-offset: 2px; }"
+    },
+    {
+      "name": "Section Kicker",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "The one kicker system: mono uppercase label with a 22px green dash prefix, one per section head.",
+      "html": "<div class=\"ds-kicker\">Услуги</div>",
+      "css": ".ds-kicker { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #2f9e5c; display: flex; align-items: center; gap: 10px; } .ds-kicker::before { content: ''; width: 22px; height: 2px; background: #2f9e5c; }"
+    },
+    {
+      "name": "Zone Legend Row",
+      "kind": "custom",
+      "description": "HACCP zone legend entry: color dot + bold zone name + role, on dark blue surfaces.",
+      "html": "<div class=\"ds-zone-demo\"><div class=\"ds-zone-row\"><span class=\"ds-dot\" style=\"background:#c0392b\"></span><b>Красный</b>&nbsp;— зоны высокого риска</div><div class=\"ds-zone-row\"><span class=\"ds-dot\" style=\"background:#2b6cb0\"></span><b>Синий</b>&nbsp;— общие помещения</div></div>",
+      "css": ".ds-zone-demo { background: #14406e; padding: 16px 20px; border-radius: 3px; } .ds-zone-row { display: flex; align-items: center; gap: 13px; padding: 9px 0; border-bottom: 1px dashed rgba(255,255,255,0.16); font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; color: rgba(255,255,255,0.8); } .ds-zone-row:last-child { border-bottom: none; } .ds-zone-row b { color: #fff; font-weight: 600; } .ds-dot { width: 13px; height: 13px; border-radius: 50%; flex: none; }"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat white card with hairline border and a 4px category-color top border.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Аудит предприятия</h3><p class=\"ds-card-text\">Выезжаем на объект и оцениваем соответствие инвентаря требованиям ХАССП.</p></div>",
+      "css": ".ds-card { background: #fff; border: 1px solid #d7e0ea; border-top: 4px solid #2f9e5c; border-radius: 3px; padding: 36px 32px; max-width: 360px; } .ds-card-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; color: #14406e; margin: 0 0 12px; } .ds-card-text { font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.55; color: #55687c; margin: 0; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Hairline-bordered input with mono uppercase label; focus switches the border to Action Green.",
+      "html": "<div><label class=\"ds-label\" for=\"ds-in\">Имя</label><input class=\"ds-input\" id=\"ds-in\" type=\"text\" placeholder=\"Как к вам обращаться\"></div>",
+      "css": ".ds-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: #55687c; margin-bottom: 6px; display: block; } .ds-input { width: 100%; max-width: 320px; background: #fff; border: 1px solid #d7e0ea; border-radius: 3px; padding: 12px 14px; color: #16293c; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; } .ds-input::placeholder { color: #9fb0c0; } .ds-input:focus { outline: none; border-color: #2f9e5c; }"
+    },
+    {
+      "name": "Zone Bar",
+      "kind": "custom",
+      "description": "The 6px five-segment HACCP strip that tops the hero — the zone map in miniature.",
+      "html": "<div class=\"ds-zonebar\"><span style=\"background:#c0392b\"></span><span style=\"background:#2b6cb0\"></span><span style=\"background:#2f9e5c\"></span><span style=\"background:#d6a324\"></span><span style=\"background:#e9e7dd\"></span></div>",
+      "css": ".ds-zonebar { display: flex; height: 6px; width: 100%; min-width: 240px; } .ds-zonebar span { flex: 1; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Карта зон (The Zone Map)",
+    "overview": "The entire system is organized like a facility zone map: everything is coded, legible, and in its place. Five HACCP zone colors act as the brand's native vocabulary — wayfinding wherever zone meaning is real, and nowhere else. Around that coded core sits an engineered, procedural frame: condensed uppercase Oswald headings, IBM Plex Mono labels that read like equipment markings, sharp 3px corners, and hairline borders. The whole page should feel the way a facility feels after a passed audit — ordered, inspection-ready, nothing to hide. The system explicitly rejects the wholesale price-list aesthetic and flashy startup-landing gradients that read unserious to industrial buyers.",
+    "keyCharacteristics": [
+      "Five HACCP zone colors used as information, never decoration",
+      "Deep Sanitary Blue surfaces alternating with white and washed-blue sections",
+      "Green reserved for action; every CTA is green",
+      "Mono uppercase micro-labels as the procedural voice",
+      "Flat surfaces, 1px hairlines, sharp 3px radius throughout"
+    ],
+    "rules": [
+      { "name": "The Zone Rule", "body": "The five HACCP colors may appear only where zone meaning is real: legends, product-group chips, the zone bar, the logomark. Using a zone color as page decoration is prohibited — it corrupts the code the brand sells.", "section": "colors" },
+      { "name": "The One Green Rule", "body": "Green means \"act\". If an element is green, it is clickable or marks an action path. Never use green for passive decoration.", "section": "colors" },
+      { "name": "The Marking Rule", "body": "Anything small and systematic — kickers, form labels, button text, metadata — is set in IBM Plex Mono uppercase with wide tracking. This is the brand's one kicker system; it always carries its 22px green dash prefix in section heads.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "No element casts a shadow at rest. A shadow is always an answer to the cursor.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do reserve Action Green (#2f9e5c) for actions — every green element must be clickable or mark the conversion path.",
+      "Do use the five HACCP zone colors only where zone meaning is real: legends, chips, the zone bar, the key teeth.",
+      "Do keep all radii at exactly 3px and all resting borders at 1px — sharpness is the \"engineered and precise\" signature.",
+      "Do set every small systematic label in IBM Plex Mono uppercase with wide tracking.",
+      "Do provide a prefers-reduced-motion alternative for every animation.",
+      "Do keep body text at Ink (#16293c) or Steel Text (#55687c) on white, and white at ≥75% alpha on Sanitary Blue — WCAG AA (4.5:1) is the floor."
+    ],
+    "donts": [
+      "Don't let this look like a wholesale price-list site: no cluttered product grids, no popups, no «Купить оптом!» banners.",
+      "Don't import flashy startup-landing aesthetics: no decorative gradients beyond the single hero blue-to-blue wash, no glassmorphism, no gradient text.",
+      "Don't use zone colors decoratively — a red divider or yellow highlight that isn't zone semantics breaks the system's credibility.",
+      "Don't add resting shadows or rounded (>3px) corners; softness reads as consumer, not industrial.",
+      "Don't use border-left/border-right color stripes on cards or callouts; the only permitted accent border is the 4px category top border on service cards.",
+      "Don't set Steel Text (#55687c) on tinted or dark backgrounds — use alpha-white on dark surfaces instead."
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "em-dash-overuse",
+      "design-system-font-size"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "pinbounce",
+        "reason": "User confirmed: map pin float uses smooth ease-in-out, name-only match",
+        "createdAt": "2026-07-13T18:22:58.208Z"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "4px",
+        "reason": "User confirmed: logomark tile radius, part of the brand mark",
+        "createdAt": "2026-07-13T18:22:58.362Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "21px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:58.514Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "18px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:58.663Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "17px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:58.801Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "16px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:58.958Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "14px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:59.108Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "13.5px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:59.250Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "11.5px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:59.406Z"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "11px",
+        "reason": "User confirmed: existing site type value, documented as ranges in DESIGN.md prose",
+        "createdAt": "2026-07-13T18:22:59.566Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#e6f5ec",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:22:59.734Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#f6dcd8",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:22:59.894Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#eec4be",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:00.057Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#d5e4f3",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:00.217Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#bcd4ea",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:00.361Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#d8efe1",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:00.518Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#bfe3cf",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:00.685Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#f5ecd2",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:00.837Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#ecdcae",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:01.005Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#f0efe9",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:01.175Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#dfddd0",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:01.318Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#c6d2dd",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:01.465Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#9fb0c0",
+        "reason": "User confirmed: photo-placeholder gradients and input placeholder tint, replaced when real photos land",
+        "createdAt": "2026-07-13T18:23:01.612Z"
+      }
+    ]
+  }
+}

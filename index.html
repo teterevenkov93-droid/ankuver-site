@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АНКУВЕР — HACCP (ХАССП) инвентарь и оборудование для пищевой промышленности</title>
+<meta name="description" content="АНКУВЕР — аудит предприятий и поставка HACCP (ХАССП) инвентаря под ключ: цветовая кодировка, щётки, скребки, мопы, тележки. Каталог по запросу.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+
+  /* ===== Design tokens — правьте здесь ===== */
+  :root{
+    --blue:       #14406e;   /* основной синий — навигация, hero, футер */
+    --blue-2:     #1b5391;
+    --blue-soft:  #eaf1f8;   /* светло-синяя подложка секций */
+    --paper:      #ffffff;
+    --line:       #d7e0ea;
+    --text:       #16293c;
+    --text-soft:  #55687c;
+    --green:      #2f9e5c;   /* акцент — кнопки, действия */
+    --green-dark: #23824a;
+
+    /* HACCP цветовая кодировка зон */
+    --zone-red:    #c0392b;
+    --zone-blue:   #2b6cb0;
+    --zone-green:  #2f9e5c;
+    --zone-yellow: #d6a324;
+    --zone-white:  #e9e7dd;
+
+    --radius: 3px;
+    --font-head: "Oswald", sans-serif;
+    --font-body: "IBM Plex Sans", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    /* Моушен: решительные затухающие кривые, без отскоков */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font-body);
+    color:var(--text);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  h1,h2,h3,h4{
+    font-family:var(--font-head);
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    font-weight:600;
+    color:var(--blue);
+  }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--green);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:2px; background:var(--green); }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--font-mono);
+    font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:15px 28px;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:active{ transform:translateY(1px); }
+  .btn-green{ background:var(--green); color:#fff; }
+  .btn-green:hover{ background:var(--green-dark); }
+  .btn-ghost{ background:transparent; border-color:rgba(255,255,255,0.4); color:#fff; }
+  .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,0.08); }
+  .btn-blue{ background:var(--blue); color:#fff; }
+  .btn-blue:hover{ background:var(--blue-2); }
+
+  /* ===== Header ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    transition:box-shadow .2s ease;
+  }
+  /* Тень — ответ на состояние: шапка «плывёт» над контентом только после скролла */
+  header.scrolled{ box-shadow:0 6px 18px rgba(20,64,110,0.08); }
+  @media (prefers-reduced-motion: reduce){ header{ transition:none; } }
+
+  /* Зонная полоса-прогресс: пять цветов ХАССП заполняются по мере прокрутки.
+     Без JS полоса полностью «зажата» clip-path'ом и не видна. */
+  .zone-progress{
+    position:absolute; left:0; right:0; bottom:-1px; height:3px;
+    display:flex; pointer-events:none;
+    clip-path:inset(0 100% 0 0);
+  }
+  .zone-progress span{ flex:1; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; gap:16px; }
+  .logo{
+    display:flex; align-items:center; gap:12px;
+    font-family:var(--font-head);
+    font-size:21px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em;
+    color:var(--blue);
+  }
+
+  /* Логомарк — ключ с пятью зубцами по цветам зон HACCP */
+  .logomark{
+    flex:none;
+    width:34px; height:40px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--blue);
+    border-radius:4px;
+  }
+  .logomark svg{ width:19px; height:29px; overflow:visible; }
+  .key-group{
+    transform-box:view-box;
+    transform-origin:8.4px 6.4px;
+    transition:transform .4s cubic-bezier(.4,0,.2,1);
+  }
+  .logo:hover .key-group{ transform:rotate(-38deg); }
+  .key-bow{ fill:none; stroke:#fff; stroke-width:2.4; }
+  .key-shaft{ fill:#fff; }
+  .tooth{ animation:toothGlow 3.2s ease-in-out infinite; }
+  .tooth-1{ fill:var(--zone-red);    animation-delay:0s;    }
+  .tooth-2{ fill:var(--zone-blue);   animation-delay:0.22s; }
+  .tooth-3{ fill:var(--zone-green);  animation-delay:0.44s; }
+  .tooth-4{ fill:var(--zone-yellow); animation-delay:0.66s; }
+  .tooth-5{ fill:var(--zone-white);  animation-delay:0.88s; }
+  @keyframes toothGlow{ 0%,100%{opacity:.5} 45%{opacity:1} }
+  @media (prefers-reduced-motion: reduce){
+    .tooth{ animation:none; opacity:1; }
+    .key-group{ transition:none; }
+    .logo:hover .key-group{ transform:none; }
+  }
+
+  .nav-links{ display:flex; gap:30px; font-size:14px; font-weight:500; }
+  .nav-links a{ color:var(--text-soft); transition:color .15s ease; }
+  .nav-links a:hover{ color:var(--blue); }
+  .nav-cta{ display:flex; align-items:center; gap:16px; }
+  .nav-phone{ font-family:var(--font-mono); font-size:14px; color:var(--blue); display:none; }
+  @media(min-width:1020px){ .nav-phone{ display:block; } }
+  @media(max-width:900px){
+    .nav-links{ display:none; }
+    .nav-cta .btn{ padding:11px 16px; font-size:11.5px; }
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    background:linear-gradient(160deg, var(--blue) 0%, var(--blue-2) 100%);
+    color:#fff;
+    position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:56px 56px;
+    pointer-events:none;
+  }
+  .hero-zonebar{ position:relative; z-index:2; height:6px; display:flex; }
+  .hero-zonebar span{ flex:1; }
+  .hero-zonebar span:nth-child(1){ background:var(--zone-red); }
+  .hero-zonebar span:nth-child(2){ background:var(--zone-blue); }
+  .hero-zonebar span:nth-child(3){ background:var(--zone-green); }
+  .hero-zonebar span:nth-child(4){ background:var(--zone-yellow); }
+  .hero-zonebar span:nth-child(5){ background:var(--zone-white); }
+
+  .hero-inner{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.15fr .85fr;
+    gap:44px; align-items:center;
+    padding:88px 0 72px;
+  }
+  @media(max-width:900px){ .hero-inner{ grid-template-columns:1fr; padding:64px 0 56px; } }
+
+  .hero h1{
+    color:#fff;
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.06;
+    margin-bottom:22px;
+  }
+  .hero h1 em{ font-style:normal; color:#7fd6a4; }
+  .hero .lead{
+    font-size:17px; color:rgba(255,255,255,0.75);
+    max-width:540px; margin-bottom:34px;
+  }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .hero-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.16);
+    border-radius:var(--radius);
+    padding:26px;
+  }
+  .hero-card h4{ color:#fff; font-size:14px; letter-spacing:.08em; margin-bottom:16px; }
+  .zone-row{
+    display:flex; align-items:center; gap:13px;
+    padding:9px 0;
+    border-bottom:1px dashed rgba(255,255,255,0.16);
+    font-size:13.5px; color:rgba(255,255,255,0.8);
+  }
+  .zone-row:last-child{ border-bottom:none; }
+  .dot{ width:13px; height:13px; border-radius:50%; flex:none; }
+  .zone-row b{ color:#fff; font-weight:600; }
+
+  /* ===== Моушен: загрузка hero — «сертификация карты зон» ===== */
+  /* Одна отрепетированная сцена: зонная полоса прочерчивается посегментно,
+     затем поднимается текст, затем чек-лист зон отмечается строка за строкой. */
+  @keyframes seg-in{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+  .hero-zonebar span{
+    transform-origin:left;
+    animation:seg-in .5s var(--ease-out-expo) both;
+  }
+  .hero-zonebar span:nth-child(1){ animation-delay:.05s; }
+  .hero-zonebar span:nth-child(2){ animation-delay:.14s; }
+  .hero-zonebar span:nth-child(3){ animation-delay:.23s; }
+  .hero-zonebar span:nth-child(4){ animation-delay:.32s; }
+  .hero-zonebar span:nth-child(5){ animation-delay:.41s; }
+
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+  .hero .eyebrow{ animation:rise .6s var(--ease-out-expo) .25s both; }
+  .hero h1{ animation:rise .6s var(--ease-out-expo) .33s both; }
+  .hero .lead{ animation:rise .6s var(--ease-out-expo) .41s both; }
+  .hero-actions{ animation:rise .6s var(--ease-out-expo) .49s both; }
+  .hero-card{ animation:rise .6s var(--ease-out-expo) .57s both; }
+
+  @keyframes check-in{ from{ opacity:0; transform:translateX(-10px); } to{ opacity:1; transform:none; } }
+  .hero-card .zone-row{ animation:check-in .45s var(--ease-out-quart) both; }
+  .hero-card .zone-row:nth-child(2){ animation-delay:.78s; }
+  .hero-card .zone-row:nth-child(3){ animation-delay:.85s; }
+  .hero-card .zone-row:nth-child(4){ animation-delay:.92s; }
+  .hero-card .zone-row:nth-child(5){ animation-delay:.99s; }
+  .hero-card .zone-row:nth-child(6){ animation-delay:1.06s; }
+
+  /* ===== Моушен: появление карточек при скролле (JS вешает .anim на <html>) ===== */
+  /* Stagger только для настоящих списков — сеток карточек; секции целиком не затухают. */
+  .anim :is(.srv-card,.pf-card,.rv-card):not(.in){ opacity:0; }
+  @keyframes rise-in{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+  .anim :is(.srv-card,.pf-card,.rv-card).in{
+    animation:rise-in .55s var(--ease-out-quart) backwards;
+    animation-delay:calc(var(--i, 0) * 70ms);
+  }
+
+  /* Штрих кикера прочерчивается при входе секции — фирменная «маркировка» */
+  .eyebrow::before{ transform-origin:left; }
+  .anim .section-head:not(.in) .eyebrow::before{ transform:scaleX(0); }
+  .anim .section-head .eyebrow::before{ transition:transform .5s var(--ease-out-expo) .1s; }
+  .anim .section-head.in .eyebrow::before{ transform:scaleX(1); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .hero-zonebar span,
+    .hero .eyebrow, .hero h1, .hero .lead, .hero-actions,
+    .hero-card, .hero-card .zone-row{ animation:none; }
+    .anim :is(.srv-card,.pf-card,.rv-card){ opacity:1 !important; animation:none !important; }
+    .anim .section-head .eyebrow::before{ transform:none; transition:none; }
+  }
+
+  /* ===== Section shell ===== */
+  section{ padding:88px 0; }
+  @media(max-width:700px){ section{ padding:64px 0; } }
+  .section-head{ max-width:660px; margin-bottom:52px; }
+  .section-head h2{ font-size:clamp(26px,3.4vw,38px); line-height:1.12; }
+  .section-head p{ color:var(--text-soft); font-size:16px; margin-top:14px; }
+
+  /* ===== Services ===== */
+  .services{ background:var(--blue-soft); }
+  .srv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media(max-width:800px){ .srv-grid{ grid-template-columns:1fr; } }
+  .srv-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-top:4px solid var(--green);
+    border-radius:var(--radius);
+    padding:36px 32px;
+  }
+  .srv-card:first-child{ border-top-color:var(--blue); }
+  .srv-card h3{ font-size:20px; margin:18px 0 12px; }
+  .srv-card > p{ color:var(--text-soft); font-size:15px; margin-bottom:20px; }
+  .srv-icon{
+    width:52px; height:52px;
+    border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .srv-card:first-child .srv-icon{ background:var(--blue-soft); }
+  .srv-card:last-child .srv-icon{ background:#e6f5ec; }
+  .srv-list li{
+    display:flex; gap:10px;
+    font-size:14.5px; color:var(--text);
+    padding:7px 0;
+  }
+  .srv-list li::before{
+    content:"";
+    width:6px; height:6px; border-radius:50%;
+    background:var(--green);
+    flex:none; margin-top:8px;
+  }
+
+  /* ===== Сцена «Аудит цеха»: pinned-секция, скролл листает этапы зонирования ===== */
+  .audit-scene{ background:var(--blue); color:#fff; padding:0; }
+  .audit-scene .section-head{ margin-bottom:0; }
+  .audit-scene .section-head h2{ color:#fff; }
+  .audit-scene .section-head p{ color:rgba(255,255,255,0.65); }
+  .audit-pin{
+    min-height:calc(100vh - 76px);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:56px 0;
+  }
+  .audit-grid{
+    display:grid; grid-template-columns:1.1fr .9fr;
+    gap:48px; align-items:center; margin-top:38px;
+  }
+  @media(max-width:900px){
+    .audit-grid{ grid-template-columns:1fr; gap:32px; }
+    .audit-pin{ min-height:0; }
+  }
+  .audit-plan{ width:100%; height:auto; }
+  .plan-wall{ fill:rgba(255,255,255,0.03); stroke:rgba(255,255,255,0.35); stroke-width:2; }
+  .plan-room{ fill:none; stroke:rgba(255,255,255,0.25); stroke-width:1.5; }
+  .plan-store{ fill:rgba(255,255,255,0.06); }
+  .plan-label{
+    font-family:var(--font-mono); font-size:11px;
+    letter-spacing:.08em; text-transform:uppercase;
+    fill:rgba(255,255,255,0.7);
+  }
+  .zone-fill{ opacity:.3; } /* без JS план цеха показан уже зонированным */
+  .audit-step{
+    display:flex; gap:14px; padding:13px 0;
+    border-bottom:1px dashed rgba(255,255,255,0.16);
+  }
+  .audit-step:last-child{ border-bottom:none; }
+  .audit-step .dot{ margin-top:5px; }
+  .audit-step b{
+    display:block; font-family:var(--font-head);
+    text-transform:uppercase; letter-spacing:.03em;
+    font-weight:600; font-size:15px; color:#fff;
+  }
+  .audit-step .desc{ font-size:13.5px; color:rgba(255,255,255,0.6); }
+  .audit-final{
+    margin-top:26px; display:flex; flex-direction:column;
+    gap:16px; align-items:flex-start;
+  }
+  .audit-badge{
+    font-family:var(--font-mono); font-size:12px;
+    letter-spacing:.12em; text-transform:uppercase;
+    color:#7fd6a4; border:1px solid #7fd6a4;
+    padding:8px 14px; border-radius:var(--radius);
+  }
+  .audit-final p{ font-size:15px; color:rgba(255,255,255,0.85); }
+  .audit-final p b{ color:#fff; }
+  /* Невысокие экраны: ужимаем сцену, чтобы финал с кнопкой не резался при пине */
+  @media (max-height: 820px) and (min-width: 900px){
+    .audit-pin{ padding:32px 0; }
+    .audit-grid{ margin-top:24px; gap:36px; }
+    .audit-step{ padding:9px 0; }
+    .audit-step .desc{ font-size:12.5px; }
+    .audit-final{ margin-top:16px; gap:10px; }
+  }
+
+  /* ===== Portfolio ===== */
+  .pf-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+  }
+  @media(max-width:900px){ .pf-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:560px){ .pf-grid{ grid-template-columns:1fr; } }
+  .pf-card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:#fff;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .pf-card:hover{ transform:translateY(-4px); box-shadow:0 12px 28px rgba(20,64,110,0.12); }
+  .pf-img{
+    height:190px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .pf-img svg{ width:124px; height:124px; }
+
+  /* Реальные фото категорий: фото закрывает заглушку, иллюстрация скрывается,
+     ховер-анимация инструмента заменяется мягким наездом камеры */
+  .pf-img .pf-photo{
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .5s var(--ease-out-quart);
+  }
+  .pf-img.has-photo svg{ display:none; }
+  .pf-card:hover .pf-photo{ transform:scale(1.05); }
+  @media (prefers-reduced-motion: reduce){
+    .pf-img .pf-photo{ transition:none; }
+    .pf-card:hover .pf-photo{ transform:none; }
+  }
+
+  /* Категории: при наведении инструмент показывает себя в работе.
+     Символы подключены через <use>, поэтому анимируется весь svg целиком. */
+  @keyframes tool-sweep{ 0%,100%{ transform:rotate(-8deg); } 50%{ transform:rotate(8deg); } }
+  @keyframes tool-scrape{ 0%,100%{ transform:translateY(0); } 45%{ transform:translateY(7px); } }
+  @keyframes tool-tilt{ 0%,100%{ transform:rotate(0deg); } 50%{ transform:rotate(-10deg); } }
+  @keyframes tool-roll{ 0%,100%{ transform:translateX(-7px); } 50%{ transform:translateX(7px); } }
+  @keyframes tool-pump{ 0%,100%{ transform:translateY(0); } 30%{ transform:translateY(5px); } 60%{ transform:translateY(0); } }
+  @keyframes tool-sway{ 0%,100%{ transform:rotate(-4deg); } 50%{ transform:rotate(4deg); } }
+
+  .cat-brush:hover     .pf-img svg{ transform-origin:50% 10%; animation:tool-sweep 1.1s ease-in-out infinite; }
+  .cat-mop:hover       .pf-img svg{ transform-origin:50% 8%;  animation:tool-sweep 1.3s ease-in-out infinite; }
+  .cat-squeegee:hover  .pf-img svg{ animation:tool-scrape .9s var(--ease-out-quart) infinite; }
+  .cat-spatula:hover   .pf-img svg{ transform-origin:25% 85%; animation:tool-tilt 1s ease-in-out infinite; }
+  .cat-bucket:hover    .pf-img svg{ transform-origin:50% 90%; animation:tool-sway 1.2s ease-in-out infinite; }
+  .cat-trolley:hover   .pf-img svg{ animation:tool-roll 1.5s ease-in-out infinite; }
+  .cat-dispenser:hover .pf-img svg{ animation:tool-pump 1s ease-in-out infinite; }
+  .cat-rack:hover      .pf-img svg{ transform-origin:50% 12%; animation:tool-sway 1.4s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce){
+    .pf-card:hover .pf-img svg{ animation:none; }
+  }
+  .pf-img .zone-chip{
+    position:absolute; top:12px; left:12px;
+    width:22px; height:22px; border-radius:50%;
+    border:2px solid rgba(255,255,255,0.85);
+    transition:transform .25s var(--ease-out-quart);
+  }
+  /* Микро-акцент: при наведении на карточку зонная метка укрупняется — код зоны и есть товар */
+  .pf-card:hover .zone-chip{ transform:scale(1.2); }
+  @media (prefers-reduced-motion: reduce){
+    .pf-img .zone-chip{ transition:none; }
+    .pf-card:hover .zone-chip{ transform:none; }
+  }
+  .pf-info{ padding:18px 20px; border-top:1px solid var(--line); }
+  .pf-info b{
+    display:block;
+    font-family:var(--font-head); text-transform:uppercase;
+    font-size:14.5px; letter-spacing:.03em; color:var(--blue);
+    margin-bottom:4px;
+  }
+  .pf-info span{ font-size:13px; color:var(--text-soft); }
+  /* Заглушки под фото: замените блок .pf-img на <img src="..."> с реальными фотографиями */
+  .ph-1{ background:linear-gradient(150deg,#f6dcd8,#eec4be); }
+  .ph-2{ background:linear-gradient(150deg,#d5e4f3,#bcd4ea); }
+  .ph-3{ background:linear-gradient(150deg,#d8efe1,#bfe3cf); }
+  .ph-4{ background:linear-gradient(150deg,#f5ecd2,#ecdcae); }
+  .ph-5{ background:linear-gradient(150deg,#f0efe9,#dfddd0); }
+  .ph-6{ background:linear-gradient(150deg,#dde5ec,#c6d2dd); }
+  .inv-draw{ stroke:var(--blue); stroke-width:3; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* ===== Reviews ===== */
+  .reviews{ background:var(--blue); }
+  .reviews .section-head h2{ color:#fff; }
+  .reviews .section-head p{ color:rgba(255,255,255,0.65); }
+  .rv-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media(max-width:900px){ .rv-grid{ grid-template-columns:1fr; } }
+  .rv-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:var(--radius);
+    padding:26px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .rv-photo{
+    height:120px; border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .rv-photo svg{ width:64px; height:64px; }
+  .rv-photo .inv-draw{ stroke:#fff; opacity:.9; }
+  .rv-text{ font-size:14.5px; color:rgba(255,255,255,0.82); flex:1; }
+  .rv-author b{ display:block; color:#fff; font-size:14px; }
+  .rv-author span{ font-size:12.5px; color:rgba(255,255,255,0.55); }
+  .rv-stars{ color:var(--zone-yellow); font-size:13px; letter-spacing:2px; }
+
+  /* ===== Catalog CTA + form ===== */
+  .catalog-cta{ background:var(--blue-soft); }
+  .cta-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:44px;
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+  }
+  @media(max-width:800px){ .cta-box{ grid-template-columns:1fr; padding:30px 24px; } }
+  .cta-box h2{ font-size:clamp(24px,2.8vw,32px); margin-bottom:12px; }
+  .cta-box p{ color:var(--text-soft); font-size:15px; }
+
+  form{ display:grid; gap:14px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:520px){ .form-row{ grid-template-columns:1fr; } }
+  label{
+    font-family:var(--font-mono);
+    font-size:11px; text-transform:uppercase; letter-spacing:.07em;
+    color:var(--text-soft);
+    margin-bottom:6px; display:block;
+  }
+  input, textarea{
+    width:100%;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    color:var(--text);
+    font-family:var(--font-body); font-size:14px;
+  }
+  input::placeholder, textarea::placeholder{ color:#9fb0c0; }
+  input:focus, textarea:focus{ outline:none; border-color:var(--green); }
+  textarea{ resize:vertical; min-height:90px; }
+  .form-note{ font-size:12px; color:var(--text-soft); }
+
+  /* dark form (в контактах) */
+  .form-dark input, .form-dark textarea{
+    background:rgba(255,255,255,0.04);
+    border-color:rgba(255,255,255,0.2);
+    color:#fff;
+  }
+  .form-dark input::placeholder, .form-dark textarea::placeholder{ color:rgba(255,255,255,0.35); }
+  .form-dark label{ color:rgba(255,255,255,0.55); }
+  .form-dark .form-note{ color:rgba(255,255,255,0.4); }
+
+  /* ===== Contacts ===== */
+  .contacts{ background:var(--blue); }
+  .contacts .section-head h2{ color:#fff; }
+  .contacts .section-head p{ color:rgba(255,255,255,0.65); }
+  .ct-grid{ display:grid; grid-template-columns:1fr 1.1fr; gap:44px; }
+  @media(max-width:900px){ .ct-grid{ grid-template-columns:1fr; } }
+  .ct-info ul{ display:grid; gap:18px; margin-bottom:32px; }
+  .ct-info li span.label{
+    font-family:var(--font-mono);
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:#7fd6a4;
+    display:block; margin-bottom:3px;
+  }
+  .ct-info li{ font-size:15px; color:rgba(255,255,255,0.88); }
+
+  .map-box{
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:var(--radius);
+    overflow:hidden;
+    height:230px;
+    position:relative;
+    background:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+      rgba(255,255,255,0.03);
+    background-size:34px 34px;
+  }
+  /* Заглушка карты: замените .map-box на iframe Яндекс.Карт или Google Maps */
+  .map-pin{
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-90%);
+    text-align:center;
+  }
+  .map-pin svg{ width:38px; height:48px; margin:0 auto; animation:pinBounce 2.4s ease-in-out infinite; }
+  @keyframes pinBounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  @media (prefers-reduced-motion: reduce){ .map-pin svg{ animation:none; } }
+  .map-pin span{
+    font-family:var(--font-mono);
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:rgba(255,255,255,0.6);
+    display:block; margin-top:8px;
+  }
+  .ct-form-box{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:var(--radius);
+    padding:30px;
+  }
+  .ct-form-box h3{ color:#fff; font-size:18px; margin-bottom:18px; }
+
+  /* ===== Footer ===== */
+  footer{
+    background:var(--blue);
+    border-top:1px solid rgba(255,255,255,0.12);
+    padding:32px 0;
+  }
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  .footer-inner .logo{ color:#fff; font-size:16px; }
+  .footer-inner .logomark{ background:rgba(255,255,255,0.1); }
+  footer p{ font-size:12.5px; color:rgba(255,255,255,0.45); }
+  .footer-links{ display:flex; gap:22px; font-size:13px; flex-wrap:wrap; }
+  .footer-links a{ color:rgba(255,255,255,0.6); }
+  .footer-links a:hover{ color:#fff; }
+
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="ankuver-key" viewBox="0 0 18 28">
+    <g class="key-group">
+      <circle class="key-bow" cx="8.4" cy="6.4" r="4.6"/>
+      <rect class="key-shaft" x="7.2" y="10.4" width="2.4" height="16" rx="1"/>
+      <rect class="tooth tooth-1" x="9.6" y="11.2" width="4.4" height="2" rx="0.5"/>
+      <rect class="tooth tooth-2" x="9.6" y="14.4" width="6.8" height="2" rx="0.5"/>
+      <rect class="tooth tooth-3" x="9.6" y="17.6" width="3.2" height="2" rx="0.5"/>
+      <rect class="tooth tooth-4" x="9.6" y="20.8" width="5.6" height="2" rx="0.5"/>
+      <rect class="tooth tooth-5" x="9.6" y="24.0" width="2.6" height="2" rx="0.5"/>
+    </g>
+  </symbol>
+
+  <!-- Простые пиктограммы инвентаря для заглушек портфолио/отзывов -->
+  <symbol id="inv-brush" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <rect x="26" y="6" width="12" height="26" rx="4"/>
+      <rect x="18" y="34" width="28" height="12" rx="3"/>
+      <line x1="22" y1="46" x2="22" y2="58"/><line x1="29" y1="46" x2="29" y2="58"/>
+      <line x1="36" y1="46" x2="36" y2="58"/><line x1="43" y1="46" x2="43" y2="58"/>
+    </g>
+  </symbol>
+  <symbol id="inv-squeegee" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <line x1="32" y1="6" x2="32" y2="38"/>
+      <rect x="12" y="38" width="40" height="10" rx="3"/>
+      <line x1="12" y1="54" x2="52" y2="54"/>
+    </g>
+  </symbol>
+  <symbol id="inv-mop" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <line x1="32" y1="4" x2="32" y2="34"/>
+      <rect x="16" y="34" width="32" height="8" rx="3"/>
+      <line x1="20" y1="42" x2="17" y2="58"/><line x1="28" y1="42" x2="27" y2="58"/>
+      <line x1="36" y1="42" x2="37" y2="58"/><line x1="44" y1="42" x2="47" y2="58"/>
+    </g>
+  </symbol>
+  <symbol id="inv-bucket" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <path d="M14 22 L20 56 L44 56 L50 22 Z"/>
+      <path d="M18 22 C18 8 46 8 46 22"/>
+      <line x1="20" y1="34" x2="44" y2="34"/>
+    </g>
+  </symbol>
+  <symbol id="inv-trolley" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <rect x="10" y="14" width="36" height="26" rx="3"/>
+      <line x1="46" y1="14" x2="54" y2="8"/>
+      <circle cx="18" cy="52" r="5"/><circle cx="40" cy="52" r="5"/>
+      <line x1="10" y1="40" x2="10" y2="47"/><line x1="46" y1="40" x2="46" y2="47"/>
+    </g>
+  </symbol>
+  <symbol id="inv-dispenser" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <rect x="20" y="24" width="24" height="34" rx="4"/>
+      <rect x="27" y="14" width="10" height="10"/>
+      <path d="M32 14 L32 8 L44 8 L44 12"/>
+      <line x1="26" y1="38" x2="38" y2="38"/>
+    </g>
+  </symbol>
+  <symbol id="inv-spatula" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <rect x="28" y="6" width="8" height="18" rx="3"/>
+      <path d="M20 24 L44 24 L48 42 L16 42 Z"/>
+      <line x1="12" y1="52" x2="52" y2="52"/>
+    </g>
+  </symbol>
+  <symbol id="inv-rack" viewBox="0 0 64 64">
+    <g class="inv-draw">
+      <rect x="8" y="10" width="48" height="8" rx="2"/>
+      <line x1="18" y1="18" x2="18" y2="28"/><circle cx="18" cy="32" r="4"/>
+      <line x1="32" y1="18" x2="32" y2="32"/><circle cx="32" cy="36" r="4"/>
+      <line x1="46" y1="18" x2="46" y2="26"/><circle cx="46" cy="30" r="4"/>
+    </g>
+  </symbol>
+
+  <!-- «Реалистичные» иллюстрации категорий: объём за счёт градиентов
+       из тональных шкал дизайн-системы, свет слева сверху. -->
+  <defs>
+    <linearGradient id="g-metal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e2e8ee"/><stop offset=".5" stop-color="#b4c0cc"/><stop offset="1" stop-color="#8494a5"/>
+    </linearGradient>
+    <linearGradient id="g-red" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e08a80"/><stop offset=".45" stop-color="#c0392b"/><stop offset="1" stop-color="#7a2015"/>
+    </linearGradient>
+    <linearGradient id="g-blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8ab3dc"/><stop offset=".45" stop-color="#2b6cb0"/><stop offset="1" stop-color="#1a4570"/>
+    </linearGradient>
+    <linearGradient id="g-green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8fd0a8"/><stop offset=".45" stop-color="#2f9e5c"/><stop offset="1" stop-color="#1d693e"/>
+    </linearGradient>
+    <linearGradient id="g-yellow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ecd28f"/><stop offset=".45" stop-color="#d6a324"/><stop offset="1" stop-color="#8f6c14"/>
+    </linearGradient>
+    <linearGradient id="g-white" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f7f6f1"/><stop offset=".5" stop-color="#e9e7dd"/><stop offset="1" stop-color="#c9c6b8"/>
+    </linearGradient>
+  </defs>
+
+  <symbol id="pic-brush" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="103" rx="36" ry="6" fill="#16293c" opacity=".1"/>
+    <line x1="34" y1="78" x2="34" y2="98" stroke="#f7f6f1" stroke-width="4" stroke-linecap="round"/>
+    <line x1="41" y1="78" x2="41" y2="99" stroke="#e9e7dd" stroke-width="4" stroke-linecap="round"/>
+    <line x1="48" y1="78" x2="48" y2="98" stroke="#f7f6f1" stroke-width="4" stroke-linecap="round"/>
+    <line x1="55" y1="78" x2="55" y2="99" stroke="#e9e7dd" stroke-width="4" stroke-linecap="round"/>
+    <line x1="62" y1="78" x2="62" y2="98" stroke="#f7f6f1" stroke-width="4" stroke-linecap="round"/>
+    <line x1="69" y1="78" x2="69" y2="99" stroke="#e9e7dd" stroke-width="4" stroke-linecap="round"/>
+    <line x1="76" y1="78" x2="76" y2="98" stroke="#f7f6f1" stroke-width="4" stroke-linecap="round"/>
+    <line x1="83" y1="78" x2="83" y2="99" stroke="#e9e7dd" stroke-width="4" stroke-linecap="round"/>
+    <rect x="30" y="70" width="60" height="10" rx="3" fill="#7a2015"/>
+    <path d="M30 70 C30 38 90 38 90 70 Z" fill="url(#g-red)"/>
+    <path d="M39 54 C44 44 56 39 66 41" fill="none" stroke="#e08a80" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+  </symbol>
+
+  <symbol id="pic-squeegee" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="100" rx="38" ry="6" fill="#16293c" opacity=".1"/>
+    <rect x="56" y="6" width="8" height="50" rx="4" fill="url(#g-metal)"/>
+    <path d="M52 54 L68 54 L74 68 L46 68 Z" fill="#1a4570"/>
+    <rect x="26" y="68" width="68" height="14" rx="4" fill="url(#g-blue)"/>
+    <rect x="28" y="82" width="64" height="8" rx="2" fill="#16293c"/>
+    <line x1="33" y1="73" x2="60" y2="73" stroke="#8ab3dc" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="pic-mop" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="100" rx="40" ry="6" fill="#16293c" opacity=".1"/>
+    <rect x="56" y="6" width="8" height="46" rx="4" fill="url(#g-metal)"/>
+    <circle cx="60" cy="55" r="6" fill="#1d693e"/>
+    <path d="M36 58 L84 58 L90 72 L30 72 Z" fill="url(#g-green)"/>
+    <rect x="26" y="72" width="68" height="14" rx="7" fill="#f7f6f1"/>
+    <line x1="38" y1="76" x2="38" y2="82" stroke="#c9c6b8" stroke-width="2"/>
+    <line x1="48" y1="76" x2="48" y2="82" stroke="#c9c6b8" stroke-width="2"/>
+    <line x1="58" y1="76" x2="58" y2="82" stroke="#c9c6b8" stroke-width="2"/>
+    <line x1="68" y1="76" x2="68" y2="82" stroke="#c9c6b8" stroke-width="2"/>
+    <line x1="78" y1="76" x2="78" y2="82" stroke="#c9c6b8" stroke-width="2"/>
+    <line x1="43" y1="62" x2="66" y2="62" stroke="#8fd0a8" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="pic-spatula" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="100" rx="34" ry="6" fill="#16293c" opacity=".1"/>
+    <rect x="53" y="8" width="14" height="36" rx="6" fill="url(#g-red)"/>
+    <circle cx="60" cy="15" r="3" fill="#7a2015"/>
+    <rect x="56" y="42" width="8" height="10" fill="#c0392b"/>
+    <path d="M34 50 L86 50 L90 88 L30 88 Z" fill="url(#g-red)"/>
+    <path d="M32 82 L88 82 L90 88 L30 88 Z" fill="#e08a80"/>
+    <line x1="44" y1="56" x2="50" y2="78" stroke="#e08a80" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+  </symbol>
+
+  <symbol id="pic-bucket" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="102" rx="34" ry="6" fill="#16293c" opacity=".1"/>
+    <path d="M34 44 C40 18 80 18 86 44" fill="none" stroke="#8494a5" stroke-width="4" stroke-linecap="round"/>
+    <path d="M32 44 L88 44 L80 94 L40 94 Z" fill="url(#g-yellow)"/>
+    <rect x="30" y="40" width="60" height="8" rx="4" fill="#8f6c14"/>
+    <line x1="44" y1="58" x2="50" y2="58" stroke="#8f6c14" stroke-width="2"/>
+    <line x1="45" y1="68" x2="51" y2="68" stroke="#8f6c14" stroke-width="2"/>
+    <line x1="46" y1="78" x2="52" y2="78" stroke="#8f6c14" stroke-width="2"/>
+    <path d="M46 52 L44 88" stroke="#ecd28f" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  </symbol>
+
+  <symbol id="pic-trolley" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="104" rx="42" ry="6" fill="#16293c" opacity=".1"/>
+    <line x1="30" y1="16" x2="30" y2="78" stroke="#8494a5" stroke-width="5" stroke-linecap="round"/>
+    <line x1="30" y1="16" x2="48" y2="16" stroke="#8494a5" stroke-width="5" stroke-linecap="round"/>
+    <path d="M40 48 L62 48 L58 74 L44 74 Z" fill="url(#g-red)"/>
+    <rect x="38" y="44" width="26" height="6" rx="3" fill="#7a2015"/>
+    <path d="M64 48 L86 48 L82 74 L68 74 Z" fill="url(#g-blue)"/>
+    <rect x="62" y="44" width="26" height="6" rx="3" fill="#1a4570"/>
+    <rect x="22" y="74" width="76" height="10" rx="3" fill="url(#g-white)"/>
+    <circle cx="36" cy="94" r="8" fill="#55687c"/><circle cx="36" cy="94" r="3" fill="#e2e8ee"/>
+    <circle cx="84" cy="94" r="8" fill="#55687c"/><circle cx="84" cy="94" r="3" fill="#e2e8ee"/>
+  </symbol>
+
+  <symbol id="pic-dispenser" viewBox="0 0 120 120">
+    <rect x="36" y="20" width="48" height="12" rx="4" fill="url(#g-blue)"/>
+    <rect x="38" y="28" width="44" height="58" rx="8" fill="url(#g-white)"/>
+    <rect x="50" y="42" width="20" height="24" rx="4" fill="#8ab3dc"/>
+    <rect x="50" y="54" width="20" height="12" rx="2" fill="#2b6cb0"/>
+    <path d="M56 86 L64 86 L60 94 Z" fill="#1a4570"/>
+    <path d="M60 97 L57 102 A3 3 0 0 0 63 102 Z" fill="#2b6cb0"/>
+    <line x1="44" y1="36" x2="44" y2="78" stroke="#f7f6f1" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+  </symbol>
+
+  <symbol id="pic-rack" viewBox="0 0 120 120">
+    <rect x="14" y="28" width="92" height="12" rx="4" fill="url(#g-metal)"/>
+    <circle cx="20" cy="34" r="2" fill="#55687c"/><circle cx="100" cy="34" r="2" fill="#55687c"/>
+    <rect x="30" y="40" width="14" height="12" rx="3" fill="url(#g-green)"/>
+    <rect x="58" y="40" width="14" height="12" rx="3" fill="url(#g-green)"/>
+    <rect x="86" y="40" width="14" height="12" rx="3" fill="url(#g-green)"/>
+    <rect x="33" y="52" width="8" height="38" rx="4" fill="url(#g-red)"/>
+    <rect x="61" y="52" width="8" height="38" rx="4" fill="url(#g-blue)"/>
+    <rect x="89" y="52" width="8" height="38" rx="4" fill="url(#g-yellow)"/>
+  </symbol>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <span class="logomark" aria-hidden="true"><svg><use href="#ankuver-key"></use></svg></span>
+      Анкувер
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Услуги</a>
+      <a href="#categories">Категории</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#catalog">Каталог</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="nav-phone">+7 (000) 000-00-00</span>
+      <a href="#catalog" class="btn btn-blue">Получить каталог</a>
+    </div>
+  </div>
+  <div class="zone-progress" aria-hidden="true">
+    <span style="background:var(--zone-red)"></span>
+    <span style="background:var(--zone-blue)"></span>
+    <span style="background:var(--zone-green)"></span>
+    <span style="background:var(--zone-yellow)"></span>
+    <span style="background:var(--zone-white)"></span>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-zonebar"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow" style="color:#7fd6a4;">HACCP / ХАССП инвентарь и оборудование</div>
+        <h1>Оснащаем пищевые производства <em>под ключ</em></h1>
+        <p class="lead">АНКУВЕР поставляет профессиональный HACCP (ХАССП) инвентарь для уборки с цветовой кодировкой зон — и проводит аудит предприятия, чтобы вы прошли любую проверку.</p>
+        <div class="hero-actions">
+          <a href="#catalog" class="btn btn-green">Получить каталог инвентаря</a>
+          <a href="#services" class="btn btn-ghost">Наши услуги →</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h4>5-зонная система кодировки</h4>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-red)"></span><b>Красный</b>&nbsp;— зоны высокого риска</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-blue)"></span><b>Синий</b>&nbsp;— общие помещения</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-green)"></span><b>Зелёный</b>&nbsp;— зоны приготовления</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-yellow)"></span><b>Жёлтый</b>&nbsp;— санузлы</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-white)"></span><b>Белый</b>&nbsp;— пекарни, кондитерские</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Услуги</div>
+        <h2>Два формата работы с предприятием</h2>
+        <p>От разовой поставки до полного сопровождения внедрения системы ХАССП на объекте.</p>
+      </div>
+      <div class="srv-grid">
+        <div class="srv-card">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="2.2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="7"/><line x1="17.5" y1="17.5" x2="24" y2="24"/>
+            </svg>
+          </div>
+          <h3>Аудит предприятия</h3>
+          <p>Выезжаем на объект, оцениваем текущее состояние уборочного инвентаря и его соответствие требованиям ХАССП.</p>
+          <ul class="srv-list">
+            <li>Карта производственных зон и рисков перекрёстного загрязнения</li>
+            <li>Перечень несоответствий с фотофиксацией</li>
+            <li>Рекомендации по цветовой кодировке под ваш регламент</li>
+            <li>Смета на дооснащение — без навязывания лишнего</li>
+          </ul>
+        </div>
+        <div class="srv-card">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9 L14 3 L25 9 L25 19 L14 25 L3 19 Z"/><path d="M3 9 L14 15 L25 9"/><line x1="14" y1="15" x2="14" y2="25"/>
+            </svg>
+          </div>
+          <h3>Поставка инвентаря под ключ</h3>
+          <p>Комплектуем объект полностью: от щёток и мопов до тележек, стеллажей и настенных держателей.</p>
+          <ul class="srv-list">
+            <li>Подбор комплекта под площадь, зоны и бюджет</li>
+            <li>Инвентарь в 5 цветах HACCP из сертифицированных материалов</li>
+            <li>Отгрузка со склада в течение 24 часов</li>
+            <li>Регулярные допоставки расходников по графику</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIT SCENE -->
+  <section id="audit" class="audit-scene">
+    <div class="wrap audit-pin">
+      <div class="section-head">
+        <div class="eyebrow" style="color:#7fd6a4;">Аудит</div>
+        <h2>Как мы зонируем предприятие</h2>
+        <p>Прокрутите — и цех разметится по зонам ХАССП прямо на схеме. Именно так выглядит результат нашего аудита.</p>
+      </div>
+      <div class="audit-grid">
+        <svg class="audit-plan" viewBox="0 0 520 400" role="img" aria-label="Схема пищевого производства с цветовым зонированием ХАССП">
+          <rect class="plan-wall" x="8" y="8" width="504" height="384" rx="4"/>
+          <rect class="zone-fill zf-red" x="20" y="20" width="210" height="170" fill="var(--zone-red)"/>
+          <rect class="zone-fill zf-green" x="246" y="20" width="246" height="170" fill="var(--zone-green)"/>
+          <rect class="zone-fill zf-blue" x="20" y="206" width="472" height="54" fill="var(--zone-blue)"/>
+          <rect class="zone-fill zf-yellow" x="20" y="276" width="150" height="104" fill="var(--zone-yellow)"/>
+          <rect class="zone-fill zf-white" x="186" y="276" width="170" height="104" fill="var(--zone-white)"/>
+          <rect class="plan-store" x="372" y="276" width="120" height="104"/>
+          <rect class="plan-room" x="20" y="20" width="210" height="170"/>
+          <rect class="plan-room" x="246" y="20" width="246" height="170"/>
+          <rect class="plan-room" x="20" y="206" width="472" height="54"/>
+          <rect class="plan-room" x="20" y="276" width="150" height="104"/>
+          <rect class="plan-room" x="186" y="276" width="170" height="104"/>
+          <rect class="plan-room" x="372" y="276" width="120" height="104"/>
+          <text class="plan-label" x="32" y="42">Разделка сырья</text>
+          <text class="plan-label" x="258" y="42">Горячий цех</text>
+          <text class="plan-label" x="32" y="238">Коридор</text>
+          <text class="plan-label" x="32" y="298">Санузлы</text>
+          <text class="plan-label" x="198" y="298">Кондитерский</text>
+          <text class="plan-label" x="384" y="298">Склад</text>
+          <circle class="zone-dot zd-red" cx="60" cy="120" r="5" fill="var(--zone-red)"/>
+          <circle class="zone-dot zd-red" cx="115" cy="90" r="5" fill="var(--zone-red)"/>
+          <circle class="zone-dot zd-red" cx="170" cy="145" r="5" fill="var(--zone-red)"/>
+          <circle class="zone-dot zd-green" cx="300" cy="100" r="5" fill="var(--zone-green)"/>
+          <circle class="zone-dot zd-green" cx="365" cy="145" r="5" fill="var(--zone-green)"/>
+          <circle class="zone-dot zd-green" cx="430" cy="80" r="5" fill="var(--zone-green)"/>
+          <circle class="zone-dot zd-blue" cx="120" cy="233" r="5" fill="var(--zone-blue)"/>
+          <circle class="zone-dot zd-blue" cx="260" cy="233" r="5" fill="var(--zone-blue)"/>
+          <circle class="zone-dot zd-blue" cx="400" cy="233" r="5" fill="var(--zone-blue)"/>
+          <circle class="zone-dot zd-yellow" cx="62" cy="335" r="5" fill="var(--zone-yellow)"/>
+          <circle class="zone-dot zd-yellow" cx="115" cy="352" r="5" fill="var(--zone-yellow)"/>
+          <circle class="zone-dot zd-white" cx="232" cy="335" r="5" fill="var(--zone-white)"/>
+          <circle class="zone-dot zd-white" cx="290" cy="352" r="5" fill="var(--zone-white)"/>
+          <circle class="zone-dot zd-white" cx="322" cy="318" r="5" fill="var(--zone-white)"/>
+        </svg>
+        <div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-red)"></span>
+            <div><b>Красная зона — разделка сырья</b><span class="desc">Щётки, скребки и шпатели, закреплённые только за этой зоной</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-blue)"></span>
+            <div><b>Синяя зона — общие помещения</b><span class="desc">Сгоны и тележки для коридоров и склада</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-green)"></span>
+            <div><b>Зелёная зона — горячий цех</b><span class="desc">Мопы и вёдра зон приготовления</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-yellow)"></span>
+            <div><b>Жёлтая зона — санузлы</b><span class="desc">Полностью отдельный комплект уборки</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-white)"></span>
+            <div><b>Белая зона — кондитерский участок</b><span class="desc">Пекарский инвентарь из светлого пластика</span></div>
+          </div>
+          <div class="audit-final">
+            <span class="audit-badge">Объект готов к проверке</span>
+            <p>Комплект под каждую зону — со склада за <b><span id="audit-count">24</span> часа</b></p>
+            <a href="#contacts" class="btn btn-green">Заказать аудит</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Категории</div>
+        <h2>Инвентарь по категориям</h2>
+        <p>Восемь групп HACCP (ХАССП) инвентаря. Наведите курсор на карточку — инструмент покажет себя в работе. Полный каталог с фото, артикулами и ценами — по запросу.</p>
+      </div>
+      <div class="pf-grid">
+        <div class="pf-card cat-brush">
+          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-brush.jpg" alt="Красные щётки и сметки с цветовой кодировкой HACCP" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-red)"></span><svg><use href="#pic-brush"></use></svg></div>
+          <div class="pf-info"><b>Щётки и сметки</b><span>Ручные и напольные, жёсткость под задачу</span></div>
+        </div>
+        <div class="pf-card cat-squeegee">
+          <div class="pf-img ph-2 has-photo"><img class="pf-photo" src="assets/cat-squeegee.jpg" alt="Синие скребки и сгоны для пищевых поверхностей" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-blue)"></span><svg><use href="#pic-squeegee"></use></svg></div>
+          <div class="pf-info"><b>Скребки и сгоны</b><span>Для полов, столов и пищевых поверхностей</span></div>
+        </div>
+        <div class="pf-card cat-mop">
+          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-mop.jpg" alt="Зелёная система влажной уборки: плоский моп и ведро" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-green)"></span><svg><use href="#pic-mop"></use></svg></div>
+          <div class="pf-info"><b>Швабры и мопы</b><span>Системы влажной уборки полов</span></div>
+        </div>
+        <div class="pf-card cat-spatula">
+          <div class="pf-img ph-4 has-photo"><img class="pf-photo" src="assets/cat-spatula.jpg" alt="Красные шпатели для очистки ёмкостей и оборудования" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-red)"></span><svg><use href="#pic-spatula"></use></svg></div>
+          <div class="pf-info"><b>Шпатели</b><span>Для очистки ёмкостей, столов и оборудования</span></div>
+        </div>
+        <div class="pf-card cat-bucket">
+          <div class="pf-img ph-5 has-photo"><img class="pf-photo" src="assets/cat-bucket.jpg" alt="Жёлтые вёдра с мерной шкалой" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-yellow)"></span><svg><use href="#pic-bucket"></use></svg></div>
+          <div class="pf-info"><b>Вёдра и ёмкости</b><span>С мерной шкалой и цветовой маркировкой</span></div>
+        </div>
+        <div class="pf-card cat-trolley">
+          <div class="pf-img ph-6 has-photo"><img class="pf-photo" src="assets/cat-trolley.jpg" alt="Уборочная тележка с красным и синим вёдрами" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-white); border-color:#c9c6b8;"></span><svg><use href="#pic-trolley"></use></svg></div>
+          <div class="pf-info"><b>Уборочные тележки</b><span>Одно- и двухвёдерные системы с отжимом</span></div>
+        </div>
+        <div class="pf-card cat-dispenser">
+          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-dispenser.jpg" alt="Дозирующая система и моющие средства" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-blue)"></span><svg><use href="#pic-dispenser"></use></svg></div>
+          <div class="pf-info"><b>Дозаторы и химия</b><span>Дозирующие системы для моющих средств</span></div>
+        </div>
+        <div class="pf-card cat-rack">
+          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-rack.jpg" alt="Настенный держатель с инструментом зелёной зоны" loading="lazy" width="1024" height="768"><span class="zone-chip" style="background:var(--zone-green)"></span><svg><use href="#pic-rack"></use></svg></div>
+          <div class="pf-info"><b>Держатели и стеллажи</b><span>Настенные системы хранения по зонам</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="color:#7fd6a4;">Отзывы</div>
+        <h2>Что говорят клиенты</h2>
+        <p>Производства, кухни и цеха, которые мы оснастили инвентарём ХАССП.</p>
+      </div>
+      <div class="rv-grid">
+        <div class="rv-card">
+          <div class="rv-photo" style="background:rgba(192,57,43,0.25)"><svg><use href="#inv-brush"></use></svg></div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">«Проходили плановую проверку Роспотребнадзора — к инвентарю ни одного замечания. Цветовая кодировка расставлена по зонам ровно так, как рекомендовал аудит Анкувера.»</p>
+          <div class="rv-author"><b>Мясоперерабатывающий цех</b><span>Начальник производства</span></div>
+        </div>
+        <div class="rv-card">
+          <div class="rv-photo" style="background:rgba(43,108,176,0.3)"><svg><use href="#inv-trolley"></use></svg></div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">«Заказали комплект на новую кухню ресторана. Привезли за сутки, всё промаркировано, персоналу выдали памятку по зонам — внедрили за один день.»</p>
+          <div class="rv-author"><b>Сеть ресторанов</b><span>Управляющий</span></div>
+        </div>
+        <div class="rv-card">
+          <div class="rv-photo" style="background:rgba(47,158,92,0.28)"><svg><use href="#inv-mop"></use></svg></div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">«Работаем по графику допоставок: расходники приезжают сами, без напоминаний. Для пищевого производства это ровно то, что нужно.»</p>
+          <div class="rv-author"><b>Кондитерское производство</b><span>Технолог</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG FORM -->
+  <section id="catalog" class="catalog-cta">
+    <div class="wrap">
+      <div class="cta-box">
+        <div>
+          <div class="eyebrow">Каталог</div>
+          <h2>Получите каталог инвентаря</h2>
+          <p>Пришлём PDF-каталог с фото, артикулами и ценами на весь ассортимент HACCP (ХАССП) инвентаря — в течение рабочего дня.</p>
+        </div>
+        <form action="#" method="post">
+          <div class="form-row">
+            <div>
+              <label for="cat-name">Имя</label>
+              <input id="cat-name" name="name" type="text" placeholder="Как к вам обращаться" required>
+            </div>
+            <div>
+              <label for="cat-phone">Телефон или email</label>
+              <input id="cat-phone" name="contact" type="text" placeholder="Куда прислать каталог" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-green">Получить каталог инвентаря</button>
+          <span class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</span>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS + KP FORM -->
+  <section id="contacts" class="contacts">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="color:#7fd6a4;">Контакты</div>
+        <h2>Свяжитесь с нами</h2>
+        <p>Ответим в течение рабочего дня и подготовим коммерческое предложение под ваш объект.</p>
+      </div>
+      <div class="ct-grid">
+        <div class="ct-info">
+          <ul>
+            <li><span class="label">Телефон</span>+7 (000) 000-00-00</li>
+            <li><span class="label">Email</span>info@ankuver.ru</li>
+            <li><span class="label">Адрес</span>г. Москва, ул. Примерная, д. 1, офис 100</li>
+            <li><span class="label">Режим работы</span>Пн–Пт, 9:00–18:00</li>
+          </ul>
+          <!-- Заглушка карты: замените этот блок на iframe Яндекс.Карт / Google Maps -->
+          <div class="map-box">
+            <div class="map-pin">
+              <svg viewBox="0 0 38 48" fill="none">
+                <path d="M19 2 C10 2 3 9 3 18 C3 30 19 46 19 46 C19 46 35 30 35 18 C35 9 28 2 19 2 Z" fill="var(--green)"/>
+                <circle cx="19" cy="17" r="6.5" fill="#fff"/>
+              </svg>
+              <span>Мы на карте</span>
+            </div>
+          </div>
+        </div>
+        <div class="ct-form-box">
+          <h3>Запросить коммерческое предложение</h3>
+          <form class="form-dark" action="#" method="post">
+            <div class="form-row">
+              <div>
+                <label for="kp-name">Имя</label>
+                <input id="kp-name" name="name" type="text" placeholder="Как к вам обращаться" required>
+              </div>
+              <div>
+                <label for="kp-phone">Телефон</label>
+                <input id="kp-phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+              </div>
+            </div>
+            <div>
+              <label for="kp-company">Компания / объект</label>
+              <input id="kp-company" name="company" type="text" placeholder="Название организации">
+            </div>
+            <div>
+              <label for="kp-message">Что нужно оснастить</label>
+              <textarea id="kp-message" name="message" placeholder="Тип производства, площадь, количество зон — всё, что знаете"></textarea>
+            </div>
+            <button type="submit" class="btn btn-green">Получить коммерческое предложение</button>
+            <span class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#top" class="logo">
+      <span class="logomark" aria-hidden="true"><svg><use href="#ankuver-key"></use></svg></span>
+      Анкувер
+    </a>
+    <div class="footer-links">
+      <a href="#services">Услуги</a>
+      <a href="#categories">Категории</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+    <p>© 2026 АНКУВЕР. HACCP (ХАССП) инвентарь для пищевой промышленности.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Тень шапки — только когда она реально плывёт над контентом
+  var header = document.querySelector('header');
+  function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 8); }
+  addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  if (reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('anim');
+
+  var targets = [];
+  document.querySelectorAll('.srv-grid, .pf-grid, .rv-grid').forEach(function(grid){
+    var kids = grid.children;
+    for (var i = 0; i < kids.length; i++){
+      kids[i].style.setProperty('--i', i);
+      targets.push(kids[i]);
+    }
+  });
+  document.querySelectorAll('.section-head').forEach(function(el){ targets.push(el); });
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { rootMargin:'0px 0px -60px 0px', threshold:0.1 });
+  targets.forEach(function(el){ io.observe(el); });
+
+  // Страховка: контент никогда не остаётся скрытым
+  setTimeout(function(){
+    targets.forEach(function(el){ el.classList.add('in'); });
+  }, 2500);
+})();
+</script>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if (!(window.gsap && window.ScrollTrigger)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Зонная полоса-прогресс: заполняется от начала до конца страницы
+  var bar = document.querySelector('.zone-progress');
+  if (bar){
+    gsap.to(bar, {
+      clipPath: 'inset(0 0% 0 0)',
+      ease: 'none',
+      scrollTrigger: { start: 0, end: 'max', scrub: 0.3 }
+    });
+  }
+
+  // Pinned-сцена «Аудит цеха»: только на десктопе, на мобильном секция статична
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 900px)', function(){
+    var scene = document.querySelector('.audit-scene');
+    if (!scene) return;
+    var zones = ['red', 'blue', 'green', 'yellow', 'white'];
+    var steps = gsap.utils.toArray('.audit-step');
+    var fin = scene.querySelector('.audit-final');
+    var cntEl = document.getElementById('audit-count');
+    var cnt = { v: 0 };
+
+    // Стартовые состояния ставит только JS: без него секция полностью видима
+    gsap.set(scene.querySelectorAll('.zone-fill'), { opacity: 0 });
+    gsap.set(scene.querySelectorAll('.zone-dot'), { scale: 0, transformOrigin: '50% 50%' });
+    gsap.set(steps, { opacity: 0.35, x: -10 });
+    gsap.set(fin, { opacity: 0, y: 14 });
+    if (cntEl) cntEl.textContent = '0';
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: scene,
+        start: 'top 76px',
+        end: '+=2400',
+        pin: true,
+        scrub: 0.5
+      }
+    });
+    zones.forEach(function(z, i){
+      tl.to(scene.querySelector('.zf-' + z), { opacity: 0.32, duration: 0.5 }, i)
+        .to(scene.querySelectorAll('.zd-' + z), { scale: 1, duration: 0.3, stagger: 0.08 }, i + 0.1)
+        .to(steps[i], { opacity: 1, x: 0, duration: 0.4 }, i + 0.1);
+    });
+    tl.to(fin, { opacity: 1, y: 0, duration: 0.6 }, zones.length)
+      .to(cnt, {
+        v: 24, duration: 0.8,
+        onUpdate: function(){ if (cntEl) cntEl.textContent = Math.round(cnt.v); }
+      }, zones.length + 0.2);
+  });
+})();
+</script>
+
+</body>
+</html>
