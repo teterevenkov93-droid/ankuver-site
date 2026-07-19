@@ -493,7 +493,11 @@
   }
   .pf-card:hover{ transform:translateY(-4px); box-shadow:0 12px 28px rgba(20,64,110,0.12); }
   .pf-img{
-    height:190px;
+    /* Фото категорий квадратные (720×720): квадратное окно показывает
+       снимок целиком, без обрезки. min-height — фолбэк для браузеров
+       без aspect-ratio (иначе контейнер с absolute-фото схлопнется). */
+    min-height:190px;
+    aspect-ratio:1;
     display:flex; align-items:center; justify-content:center;
     position:relative;
     overflow:hidden;
