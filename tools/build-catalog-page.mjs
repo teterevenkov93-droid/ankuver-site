@@ -118,8 +118,25 @@ const html = `<!DOCTYPE html>
   .cb-count{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-soft); margin-left:auto; }
   .prod-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:14px; }
   .prod-card{ border:1px solid var(--line); border-radius:var(--radius); background:#fff; overflow:hidden; }
-  .pc-img{ aspect-ratio:1; border-bottom:1px solid var(--line); }
+  .pc-img{ aspect-ratio:1; border-bottom:1px solid var(--line); cursor:zoom-in; }
   .pc-img img{ width:100%; height:100%; object-fit:contain; }
+
+  /* Лайтбокс: клик по фото товара открывает его крупно */
+  .lightbox{ border:none; border-radius:var(--radius); padding:0; background:#fff; max-width:min(92vw, 640px); }
+  .lightbox::backdrop{ background:rgba(10, 26, 44, 0.86); }
+  .lightbox img{ width:100%; height:auto; max-height:78vh; object-fit:contain; }
+  .lb-cap{ font-size:13.5px; color:var(--text); padding:12px 52px 14px 16px; border-top:1px solid var(--line); }
+  .lb-cap .pc-art{ margin-bottom:2px; }
+  .lb-close{
+    position:absolute; top:8px; right:8px;
+    width:38px; height:38px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.92);
+    border:1px solid var(--line); border-radius:var(--radius);
+    font-size:20px; line-height:1; color:var(--text);
+    cursor:pointer;
+  }
+  .lb-close:hover{ background:#fff; color:var(--blue); }
   .pc-info{ padding:10px 12px 12px; }
   .pc-art{ display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-soft); margin-bottom:3px; }
   .pc-info b{ font-size:13px; font-weight:600; line-height:1.35; color:var(--text); }
@@ -221,6 +238,41 @@ ${blocks}
     <p>© 2026 АНКУВЕР. HACCP (ХАССП) инвентарь для пищевой промышленности.</p>
   </div>
 </footer>
+
+<dialog class="lightbox" id="lightbox">
+  <button type="button" class="lb-close" aria-label="Закрыть">×</button>
+  <img src="" alt="">
+  <p class="lb-cap"><span class="pc-art"></span><b></b></p>
+</dialog>
+
+<script>
+(function(){
+  // Лайтбокс: клик по фото товара — увеличенный просмотр
+  var lb = document.getElementById('lightbox');
+  if (lb && lb.showModal){
+    var lbImg = lb.querySelector('img');
+    var lbArt = lb.querySelector('.pc-art');
+    var lbName = lb.querySelector('.lb-cap b');
+    document.querySelectorAll('.prod-card').forEach(function(card){
+      card.querySelector('.pc-img').addEventListener('click', function(){
+        var img = card.querySelector('.pc-img img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbArt.textContent = card.querySelector('.pc-art').textContent;
+        lbName.textContent = card.querySelector('.pc-info b').textContent;
+        lb.showModal();
+      });
+    });
+    lb.querySelector('.lb-close').addEventListener('click', function(){ lb.close(); });
+    lb.addEventListener('click', function(e){
+      // клик по подложке (вне контента) закрывает; Esc работает нативно
+      var r = lb.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) lb.close();
+    });
+    lb.addEventListener('close', function(){ lbImg.src = ''; });
+  }
+})();
+</script>
 
 <script>
 (function(){
