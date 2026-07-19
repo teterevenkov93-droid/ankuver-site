@@ -504,27 +504,17 @@
   @media (prefers-reduced-motion: reduce){
     .pf-card:hover .pf-img svg{ animation:none; }
   }
-  .pf-img .zone-chip{
-    position:absolute; top:12px; left:12px;
-    width:22px; height:22px; border-radius:50%;
-    border:2px solid rgba(255,255,255,0.85);
-    transition:transform .25s var(--ease-out-quart);
-  }
-  /* Микро-акцент: при наведении на карточку зонная метка укрупняется — код зоны и есть товар */
-  .pf-card:hover .zone-chip{ transform:scale(1.2); }
-  @media (prefers-reduced-motion: reduce){
-    .pf-img .zone-chip{ transition:none; }
-    .pf-card:hover .zone-chip{ transform:none; }
-  }
-  /* Ряд доступных расцветок под категорией: ховер/фокус на кружке
-     перекрашивает фото через цветовой слой (mix-blend-mode: color
-     сохраняет свет и тени снимка, меняя только тон) */
+  /* Ряд доступных расцветок под категорией. Базовое состояние: весь
+     инвентарь показан синим. mix-blend-mode: hue меняет только оттенок —
+     нейтральный фон фото (насыщенность ~0) не перекрашивается вовсе,
+     красится только цветной инвентарь. Белая расцветка — режим
+     saturation (обесцвечивание), фон так же не трогает. */
   .pf-img{ isolation:isolate; }
   .pf-tint{
     position:absolute; inset:0;
-    mix-blend-mode:color;
-    opacity:0;
-    transition:opacity .25s ease;
+    mix-blend-mode:hue;
+    background:var(--zone-blue);
+    transition:background .25s ease;
     pointer-events:none;
   }
   .color-row{ display:flex; gap:9px; margin-top:12px; }
@@ -546,13 +536,13 @@
   .dot-white{ background:var(--zone-white); border-color:#c9c6b8; }
   .dot-purple{ background:var(--inv-purple); }
   .dot-orange{ background:var(--inv-orange); }
-  .pf-card:has(.dot-red:hover,    .dot-red:focus)    .pf-tint{ opacity:1; background:var(--zone-red); }
-  .pf-card:has(.dot-blue:hover,   .dot-blue:focus)   .pf-tint{ opacity:1; background:var(--zone-blue); }
-  .pf-card:has(.dot-yellow:hover, .dot-yellow:focus) .pf-tint{ opacity:1; background:var(--zone-yellow); }
-  .pf-card:has(.dot-green:hover,  .dot-green:focus)  .pf-tint{ opacity:1; background:var(--zone-green); }
-  .pf-card:has(.dot-white:hover,  .dot-white:focus)  .pf-tint{ opacity:1; background:var(--zone-white); }
-  .pf-card:has(.dot-purple:hover, .dot-purple:focus) .pf-tint{ opacity:1; background:var(--inv-purple); }
-  .pf-card:has(.dot-orange:hover, .dot-orange:focus) .pf-tint{ opacity:1; background:var(--inv-orange); }
+  .pf-card:has(.dot-blue:hover,   .dot-blue:focus)   .pf-tint{ background:var(--zone-blue); }
+  .pf-card:has(.dot-red:hover,    .dot-red:focus)    .pf-tint{ background:var(--zone-red); }
+  .pf-card:has(.dot-yellow:hover, .dot-yellow:focus) .pf-tint{ background:var(--zone-yellow); }
+  .pf-card:has(.dot-green:hover,  .dot-green:focus)  .pf-tint{ background:var(--zone-green); }
+  .pf-card:has(.dot-white:hover,  .dot-white:focus)  .pf-tint{ background:#000; mix-blend-mode:saturation; }
+  .pf-card:has(.dot-purple:hover, .dot-purple:focus) .pf-tint{ background:var(--inv-purple); }
+  .pf-card:has(.dot-orange:hover, .dot-orange:focus) .pf-tint{ background:var(--inv-orange); }
   @media (prefers-reduced-motion: reduce){
     .pf-tint{ transition:none; }
     .color-dot{ transition:none; }
@@ -1115,36 +1105,36 @@
       </div>
       <div class="pf-grid">
         <div class="pf-card cat-brush">
-          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-brush.jpg" alt="Красные щётки и сметки с цветовой кодировкой HACCP" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-red)"></span><svg><use href="#pic-brush"></use></svg></div>
-          <div class="pf-info"><b>Щётки и сметки</b><span>Ручные и напольные, жёсткость под задачу</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-brush.jpg" alt="Красные щётки и сметки с цветовой кодировкой HACCP" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-brush"></use></svg></div>
+          <div class="pf-info"><b>Щётки и сметки</b><span>Ручные и напольные, жёсткость под задачу</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-squeegee">
-          <div class="pf-img ph-2 has-photo"><img class="pf-photo" src="assets/cat-squeegee.jpg" alt="Синие скребки и сгоны для пищевых поверхностей" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-blue)"></span><svg><use href="#pic-squeegee"></use></svg></div>
-          <div class="pf-info"><b>Скребки и сгоны</b><span>Для полов, столов и пищевых поверхностей</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-2 has-photo"><img class="pf-photo" src="assets/cat-squeegee.jpg" alt="Синие скребки и сгоны для пищевых поверхностей" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-squeegee"></use></svg></div>
+          <div class="pf-info"><b>Скребки и сгоны</b><span>Для полов, столов и пищевых поверхностей</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-mop">
-          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-mop.jpg" alt="Зелёная система влажной уборки: плоский моп и ведро" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-green)"></span><svg><use href="#pic-mop"></use></svg></div>
-          <div class="pf-info"><b>Швабры и мопы</b><span>Системы влажной уборки полов</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-mop.jpg" alt="Зелёная система влажной уборки: плоский моп и ведро" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-mop"></use></svg></div>
+          <div class="pf-info"><b>Швабры и мопы</b><span>Системы влажной уборки полов</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-spatula">
-          <div class="pf-img ph-4 has-photo"><img class="pf-photo" src="assets/cat-spatula.jpg" alt="Красные шпатели для очистки ёмкостей и оборудования" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-red)"></span><svg><use href="#pic-spatula"></use></svg></div>
-          <div class="pf-info"><b>Шпатели</b><span>Для очистки ёмкостей, столов и оборудования</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-4 has-photo"><img class="pf-photo" src="assets/cat-spatula.jpg" alt="Красные шпатели для очистки ёмкостей и оборудования" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-spatula"></use></svg></div>
+          <div class="pf-info"><b>Шпатели</b><span>Для очистки ёмкостей, столов и оборудования</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-bucket">
-          <div class="pf-img ph-5 has-photo"><img class="pf-photo" src="assets/cat-bucket.jpg" alt="Жёлтые вёдра с мерной шкалой" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-yellow)"></span><svg><use href="#pic-bucket"></use></svg></div>
-          <div class="pf-info"><b>Вёдра и ёмкости</b><span>С мерной шкалой и цветовой маркировкой</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-5 has-photo"><img class="pf-photo" src="assets/cat-bucket.jpg" alt="Жёлтые вёдра с мерной шкалой" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-bucket"></use></svg></div>
+          <div class="pf-info"><b>Вёдра и ёмкости</b><span>С мерной шкалой и цветовой маркировкой</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-trolley">
-          <div class="pf-img ph-6 has-photo"><img class="pf-photo" src="assets/cat-trolley.jpg" alt="Уборочная тележка с красным и синим вёдрами" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-white); border-color:#c9c6b8;"></span><svg><use href="#pic-trolley"></use></svg></div>
-          <div class="pf-info"><b>Уборочные тележки</b><span>Одно- и двухвёдерные системы с отжимом</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-6 has-photo"><img class="pf-photo" src="assets/cat-trolley.jpg" alt="Уборочная тележка с красным и синим вёдрами" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-trolley"></use></svg></div>
+          <div class="pf-info"><b>Уборочные тележки</b><span>Одно- и двухвёдерные системы с отжимом</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-dispenser">
-          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-dispenser.jpg" alt="Дозирующая система и моющие средства" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-blue)"></span><svg><use href="#pic-dispenser"></use></svg></div>
-          <div class="pf-info"><b>Дозаторы и химия</b><span>Дозирующие системы для моющих средств</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-dispenser.jpg" alt="Дозирующая система и моющие средства" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-dispenser"></use></svg></div>
+          <div class="pf-info"><b>Дозаторы и химия</b><span>Дозирующие системы для моющих средств</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-rack">
-          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-rack.jpg" alt="Настенный держатель с инструментом зелёной зоны" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><span class="zone-chip" style="background:var(--zone-green)"></span><svg><use href="#pic-rack"></use></svg></div>
-          <div class="pf-info"><b>Держатели и стеллажи</b><span>Настенные системы хранения по зонам</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-rack.jpg" alt="Настенный держатель с инструментом зелёной зоны" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-rack"></use></svg></div>
+          <div class="pf-info"><b>Держатели и стеллажи</b><span>Настенные системы хранения по зонам</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
       </div>
     </div>
@@ -1408,7 +1398,7 @@
   // CSS — появлением карточек; Motion — только тем, что здесь.
   if (!window.Motion) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var animate = Motion.animate, inView = Motion.inView, press = Motion.press;
+  var animate = Motion.animate, press = Motion.press;
   document.documentElement.classList.add('motion');
 
   // 1) Кнопки: пружинное нажатие. Затухающая пружина без отскока — по DESIGN.md
@@ -1419,32 +1409,7 @@
     };
   });
 
-  // 2) Зонная метка «ставится» на карточку категории при входе в вьюпорт.
-  //    На время анимации выключаем CSS-транзишен метки, потом возвращаем
-  //    inline-стили как были — ховер-укрупнение снова у CSS.
-  var chips = document.querySelectorAll('.pf-img .zone-chip');
-  chips.forEach(function(chip){
-    chip.style.transform = 'scale(0)';
-    chip.style.transition = 'none';
-    inView(chip, function(){
-      var a = animate(chip, { scale: [0, 1] }, { type: 'spring', visualDuration: 0.35, bounce: 0 });
-      a.finished.then(function(){
-        chip.style.transform = '';
-        chip.style.transition = '';
-      });
-    }, { amount: 0.5 });
-  });
-  // Страховка: метки никогда не остаются скрытыми
-  setTimeout(function(){
-    chips.forEach(function(chip){
-      if (chip.style.transform === 'scale(0)'){
-        chip.style.transform = '';
-        chip.style.transition = '';
-      }
-    });
-  }, 4000);
-
-  // 3) Невалидное поле формы: короткий сдвиг-«отказ» рядом с браузерной подсказкой
+  // 2) Невалидное поле формы: короткий сдвиг-«отказ» рядом с браузерной подсказкой
   document.querySelectorAll('input, textarea').forEach(function(field){
     field.addEventListener('invalid', function(){
       animate(field, { x: [0, -6, 5, -3, 0] }, { duration: 0.3, ease: 'easeOut' });

@@ -200,7 +200,7 @@ Engineered and precise: sharp 3px radius everywhere, mono uppercase labels, hair
 ### Do:
 - **Do** reserve Action Green (#2f9e5c) for actions — every green element must be clickable or mark the conversion path (The One Green Rule).
 - **Do** use the five HACCP zone colors only where zone meaning is real: legends, chips, the zone bar, the key teeth (The Zone Rule).
-- **Do** treat the category color-row (`.color-dot`, 18px circles under each category card) as product-color swatches, not zones: the five zone colors plus `--inv-purple` (#8e44ad) and `--inv-orange` (#d35400). Hover/focus on a dot recolors the category photo via a `mix-blend-mode: color` overlay (`.pf-tint`) driven by CSS `:has()` — no JS.
+- **Do** treat the category color-row (`.color-dot`, 18px circles under each category card, blue first) as product-color swatches, not zones: the five zone colors plus `--inv-purple` (#8e44ad) and `--inv-orange` (#d35400). The photo's base state is blue; hover/focus on a dot re-hues only the inventory via a `mix-blend-mode: hue` overlay (`.pf-tint`, white swatch = `saturation` desaturation) driven by CSS `:has()` — the neutral photo background never shifts, no JS involved. Category cards carry no zone chips.
 - **Do** keep all radii at exactly 3px and all resting borders at 1px — sharpness is the "engineered and precise" signature.
 - **Do** set every small systematic label in IBM Plex Mono uppercase with wide tracking (The Marking Rule).
 - **Do** provide a `prefers-reduced-motion` alternative for every animation, as the logomark and map pin already do.

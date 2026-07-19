@@ -37,7 +37,7 @@ Category photo generation (`tools/gen-photos.mjs`): `GEMINI_API_KEY=... node too
 
 ## index.html structure
 
-One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*` category illustrations with hover "tool works" animations), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger and Motion 12 (`motion.js`, vanilla build — see the `motion-vanilla-animations` skill) are vendored in `vendor/` (no CDN). Engine ownership: GSAP drives the zone-color scroll progress bar and the pinned scroll scene «Аудит цеха» (`#audit`, desktop-only pin); CSS drives the hero load sequence and card entrances; Motion drives micro-interactions only (button press springs, category zone-chip pop-in, invalid-field shake) behind an `html.motion` class gate. Never animate the same element's property with two engines. Everything must stay fully readable with JS disabled or `prefers-reduced-motion`.
+One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*` category illustrations with hover "tool works" animations), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger and Motion 12 (`motion.js`, vanilla build — see the `motion-vanilla-animations` skill) are vendored in `vendor/` (no CDN). Engine ownership: GSAP drives the zone-color scroll progress bar and the pinned scroll scene «Аудит цеха» (`#audit`, desktop-only pin); CSS drives the hero load sequence and card entrances; Motion drives micro-interactions only (button press springs, invalid-field shake) behind an `html.motion` class gate. Never animate the same element's property with two engines. Everything must stay fully readable with JS disabled or `prefers-reduced-motion`.
 
 ## Known placeholders (intentional, pending)
 
