@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>АНКУВЕР — HACCP (ХАССП) инвентарь и оборудование для пищевой промышленности</title>
-<meta name="description" content="АНКУВЕР — аудит предприятий и поставка HACCP (ХАССП) инвентаря под ключ: цветовая кодировка, щётки, скребки, мопы, тележки. Каталог по запросу.">
+<meta name="description" content="АНКУВЕР — поставка HACCP (ХАССП) инвентаря под ключ: 7 цветов кодировки, сгоны, щётки, вёдра, скребки, рукоятки, держатели. Со склада за 24 часа. Каталог по запросу.">
 <meta name="theme-color" content="#14406e">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="АНКУВЕР — HACCP (ХАССП) инвентарь для пищевой промышленности">
-<meta property="og:description" content="Аудит предприятий и поставка HACCP (ХАССП) инвентаря под ключ: цветовая кодировка, щётки, скребки, мопы, тележки.">
+<meta property="og:description" content="Поставка HACCP (ХАССП) инвентаря под ключ: 7 цветов кодировки, сгоны, щётки, вёдра, скребки, рукоятки, держатели. Со склада за 24 часа.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314406e'/%3E%3Ccircle cx='14' cy='8.5' r='3.6' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Crect x='13' y='12' width='2.2' height='14' rx='1' fill='%23fff'/%3E%3Crect x='15.4' y='13' width='4' height='1.8' rx='.5' fill='%23c0392b'/%3E%3Crect x='15.4' y='16' width='6' height='1.8' rx='.5' fill='%232b6cb0'/%3E%3Crect x='15.4' y='19' width='3' height='1.8' rx='.5' fill='%232f9e5c'/%3E%3Crect x='15.4' y='22' width='5' height='1.8' rx='.5' fill='%23d6a324'/%3E%3Crect x='15.4' y='25' width='2.6' height='1.8' rx='.5' fill='%23e9e7dd'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,16 +28,15 @@
     --green:      #2f9e5c;   /* акцент — кнопки, действия */
     --green-dark: #23824a;
 
-    /* HACCP цветовая кодировка зон */
+    /* HACCP цветовая кодировка: 7 базовых цветов + тёмно-красный для уборки санзон */
     --zone-red:    #c0392b;
     --zone-blue:   #2b6cb0;
     --zone-green:  #2f9e5c;
     --zone-yellow: #d6a324;
     --zone-white:  #e9e7dd;
-
-    /* Доступные расцветки инвентаря сверх 5 зон (цвет товара, не зона) */
-    --inv-purple:  #8e44ad;
-    --inv-orange:  #d35400;
+    --zone-purple: #8e44ad;
+    --zone-orange: #d35400;
+    --zone-darkred:#7a2015;
 
     --radius: 3px;
     --font-head: "Oswald", sans-serif;
@@ -50,7 +49,7 @@
   }
 
   *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; scroll-padding-top:88px; }
+  html{ scroll-behavior:smooth; scroll-padding-top:108px; }
   body{
     font-family:var(--font-body);
     color:var(--text);
@@ -88,6 +87,7 @@
     font-weight:600;
     color:var(--blue);
   }
+  h1,h2,h3{ text-wrap:balance; }
 
   .eyebrow{
     font-family:var(--font-mono);
@@ -134,14 +134,29 @@
   header.scrolled{ box-shadow:0 6px 18px rgba(20,64,110,0.08); }
   @media (prefers-reduced-motion: reduce){ header{ transition:none; } }
 
-  /* Зонная полоса-прогресс: пять цветов ХАССП заполняются по мере прокрутки.
-     Без JS полоса полностью «зажата» clip-path'ом и не видна. */
-  .zone-progress{
-    position:absolute; left:0; right:0; bottom:-1px; height:3px;
-    display:flex; pointer-events:none;
+  /* Швабра-прогресс: маленькая швабра едет по полосе под шапкой по мере
+     прокрутки, за ней «отмывается» повторяющееся слово HACCP.
+     Без JS/при reduced-motion полоса пуста: текст зажат clip-path'ом,
+     швабра прозрачна — GSAP включает и ведёт обоих. */
+  .mop-progress{
+    position:relative; height:18px; overflow:hidden;
+    pointer-events:none;
+  }
+  .mop-trail{
+    position:absolute; inset:0;
+    display:flex; align-items:center;
+    padding-left:8px;
+    white-space:nowrap; overflow:hidden;
+    font-family:var(--font-mono);
+    font-size:9px; letter-spacing:.3em; word-spacing:1.8em;
+    color:var(--blue); opacity:.5;
     clip-path:inset(0 100% 0 0);
   }
-  .zone-progress span{ flex:1; }
+  .mop-cursor{
+    position:absolute; left:2px; top:1px;
+    width:22px; height:16px;
+    opacity:0;
+  }
   .nav{ display:flex; align-items:center; justify-content:space-between; height:76px; gap:16px; }
   .logo{
     display:flex; align-items:center; gap:12px;
@@ -251,9 +266,11 @@
   .hero-zonebar span{ flex:1; }
   .hero-zonebar span:nth-child(1){ background:var(--zone-red); }
   .hero-zonebar span:nth-child(2){ background:var(--zone-blue); }
-  .hero-zonebar span:nth-child(3){ background:var(--zone-green); }
-  .hero-zonebar span:nth-child(4){ background:var(--zone-yellow); }
+  .hero-zonebar span:nth-child(3){ background:var(--zone-yellow); }
+  .hero-zonebar span:nth-child(4){ background:var(--zone-green); }
   .hero-zonebar span:nth-child(5){ background:var(--zone-white); }
+  .hero-zonebar span:nth-child(6){ background:var(--zone-purple); }
+  .hero-zonebar span:nth-child(7){ background:var(--zone-orange); }
 
   .hero-inner{
     position:relative; z-index:2;
@@ -291,6 +308,8 @@
   }
   .zone-row:last-child{ border-bottom:none; }
   .dot{ width:13px; height:13px; border-radius:50%; flex:none; }
+  /* Двойная зона уборки: оранжевый (производство/склады) + тёмно-красный (санзоны) */
+  .dot-split{ background:linear-gradient(90deg, var(--zone-orange) 50%, var(--zone-darkred) 50%); }
   .zone-row b{ color:#fff; font-weight:600; }
 
   /* ===== Моушен: загрузка hero — «сертификация карты зон» ===== */
@@ -302,10 +321,12 @@
     animation:seg-in .5s var(--ease-out-expo) both;
   }
   .hero-zonebar span:nth-child(1){ animation-delay:.05s; }
-  .hero-zonebar span:nth-child(2){ animation-delay:.14s; }
-  .hero-zonebar span:nth-child(3){ animation-delay:.23s; }
-  .hero-zonebar span:nth-child(4){ animation-delay:.32s; }
-  .hero-zonebar span:nth-child(5){ animation-delay:.41s; }
+  .hero-zonebar span:nth-child(2){ animation-delay:.13s; }
+  .hero-zonebar span:nth-child(3){ animation-delay:.21s; }
+  .hero-zonebar span:nth-child(4){ animation-delay:.29s; }
+  .hero-zonebar span:nth-child(5){ animation-delay:.37s; }
+  .hero-zonebar span:nth-child(6){ animation-delay:.45s; }
+  .hero-zonebar span:nth-child(7){ animation-delay:.53s; }
 
   @keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
   .hero .eyebrow{ animation:rise .6s var(--ease-out-expo) .25s both; }
@@ -321,6 +342,8 @@
   .hero-card .zone-row:nth-child(4){ animation-delay:.92s; }
   .hero-card .zone-row:nth-child(5){ animation-delay:.99s; }
   .hero-card .zone-row:nth-child(6){ animation-delay:1.06s; }
+  .hero-card .zone-row:nth-child(7){ animation-delay:1.13s; }
+  .hero-card .zone-row:nth-child(8){ animation-delay:1.20s; }
 
   /* ===== Моушен: появление карточек при скролле (JS вешает .anim на <html>) ===== */
   /* Stagger только для настоящих списков — сеток карточек; секции целиком не затухают. */
@@ -386,13 +409,22 @@
     flex:none; margin-top:8px;
   }
 
-  /* ===== Сцена «Аудит цеха»: pinned-секция, скролл листает этапы зонирования ===== */
-  .audit-scene{ background:var(--blue); color:#fff; padding:0; }
+  /* ===== Сцена «Зонирование цеха»: pinned-секция, скролл листает семь цветов ===== */
+  .audit-scene{ background:var(--blue); color:#fff; padding:0; position:relative; }
+  /* Полупрозрачный цех из нержавейки — фактура настоящего производства */
+  .audit-scene::before{
+    content:"";
+    position:absolute; inset:0;
+    background:url("assets/bg-facility.jpg") center/cover no-repeat;
+    opacity:.09;
+    pointer-events:none;
+  }
+  .audit-scene .wrap{ position:relative; z-index:1; }
   .audit-scene .section-head{ margin-bottom:0; }
   .audit-scene .section-head h2{ color:#fff; }
   .audit-scene .section-head p{ color:rgba(255,255,255,0.65); }
   .audit-pin{
-    min-height:calc(100vh - 76px);
+    min-height:calc(100vh - 94px);
     display:flex; flex-direction:column; justify-content:center;
     padding:56px 0;
   }
@@ -415,7 +447,7 @@
   }
   .zone-fill{ opacity:.3; } /* без JS план цеха показан уже зонированным */
   .audit-step{
-    display:flex; gap:14px; padding:13px 0;
+    display:flex; gap:14px; padding:10px 0;
     border-bottom:1px dashed rgba(255,255,255,0.16);
   }
   .audit-step:last-child{ border-bottom:none; }
@@ -483,40 +515,9 @@
     .pf-card:hover .pf-photo{ transform:none; }
   }
 
-  /* Категории: при наведении инструмент показывает себя в работе.
-     Символы подключены через <use>, поэтому анимируется весь svg целиком. */
-  @keyframes tool-sweep{ 0%,100%{ transform:rotate(-8deg); } 50%{ transform:rotate(8deg); } }
-  @keyframes tool-scrape{ 0%,100%{ transform:translateY(0); } 45%{ transform:translateY(7px); } }
-  @keyframes tool-tilt{ 0%,100%{ transform:rotate(0deg); } 50%{ transform:rotate(-10deg); } }
-  @keyframes tool-roll{ 0%,100%{ transform:translateX(-7px); } 50%{ transform:translateX(7px); } }
-  @keyframes tool-pump{ 0%,100%{ transform:translateY(0); } 30%{ transform:translateY(5px); } 60%{ transform:translateY(0); } }
-  @keyframes tool-sway{ 0%,100%{ transform:rotate(-4deg); } 50%{ transform:rotate(4deg); } }
-
-  .cat-brush:hover     .pf-img svg{ transform-origin:50% 10%; animation:tool-sweep 1.1s ease-in-out infinite; }
-  .cat-mop:hover       .pf-img svg{ transform-origin:50% 8%;  animation:tool-sweep 1.3s ease-in-out infinite; }
-  .cat-squeegee:hover  .pf-img svg{ animation:tool-scrape .9s var(--ease-out-quart) infinite; }
-  .cat-spatula:hover   .pf-img svg{ transform-origin:25% 85%; animation:tool-tilt 1s ease-in-out infinite; }
-  .cat-bucket:hover    .pf-img svg{ transform-origin:50% 90%; animation:tool-sway 1.2s ease-in-out infinite; }
-  .cat-trolley:hover   .pf-img svg{ animation:tool-roll 1.5s ease-in-out infinite; }
-  .cat-dispenser:hover .pf-img svg{ animation:tool-pump 1s ease-in-out infinite; }
-  .cat-rack:hover      .pf-img svg{ transform-origin:50% 12%; animation:tool-sway 1.4s ease-in-out infinite; }
-
-  @media (prefers-reduced-motion: reduce){
-    .pf-card:hover .pf-img svg{ animation:none; }
-  }
-  /* Ряд доступных расцветок под категорией. Базовое состояние: весь
-     инвентарь показан синим. mix-blend-mode: hue меняет только оттенок —
-     нейтральный фон фото (насыщенность ~0) не перекрашивается вовсе,
-     красится только цветной инвентарь. Белая расцветка — режим
-     saturation (обесцвечивание), фон так же не трогает. */
-  .pf-img{ isolation:isolate; }
-  .pf-tint{
-    position:absolute; inset:0;
-    mix-blend-mode:hue;
-    background:var(--zone-blue);
-    transition:background .25s ease;
-    pointer-events:none;
-  }
+  /* Ряд доступных расцветок под категорией. У каждой категории есть
+     реальные фото всех семи цветов (assets/cat-{категория}-{цвет}.jpg):
+     кружок под карточкой переключает снимок. Базовое состояние — синий. */
   .color-row{ display:flex; gap:9px; margin-top:12px; }
   .color-dot{
     width:18px; height:18px; flex:none;
@@ -534,19 +535,22 @@
   .dot-yellow{ background:var(--zone-yellow); }
   .dot-green{ background:var(--zone-green); }
   .dot-white{ background:var(--zone-white); border-color:#c9c6b8; }
-  .dot-purple{ background:var(--inv-purple); }
-  .dot-orange{ background:var(--inv-orange); }
-  .pf-card:has(.dot-blue:hover,   .dot-blue:focus)   .pf-tint{ background:var(--zone-blue); }
-  .pf-card:has(.dot-red:hover,    .dot-red:focus)    .pf-tint{ background:var(--zone-red); }
-  .pf-card:has(.dot-yellow:hover, .dot-yellow:focus) .pf-tint{ background:var(--zone-yellow); }
-  .pf-card:has(.dot-green:hover,  .dot-green:focus)  .pf-tint{ background:var(--zone-green); }
-  .pf-card:has(.dot-white:hover,  .dot-white:focus)  .pf-tint{ background:#000; mix-blend-mode:saturation; }
-  .pf-card:has(.dot-purple:hover, .dot-purple:focus) .pf-tint{ background:var(--inv-purple); }
-  .pf-card:has(.dot-orange:hover, .dot-orange:focus) .pf-tint{ background:var(--inv-orange); }
+  .dot-purple{ background:var(--zone-purple); }
+  .dot-orange{ background:var(--zone-orange); }
+  .pf-card .pf-photo{ opacity:0; transition:opacity .25s ease, transform .5s var(--ease-out-quart); }
+  .pf-card .v-blue{ opacity:1; }
+  .pf-card:has(.color-dot:hover, .color-dot:focus) .v-blue{ opacity:0; }
+  .pf-card:has(.dot-blue:hover,   .dot-blue:focus)   .v-blue{ opacity:1; }
+  .pf-card:has(.dot-red:hover,    .dot-red:focus)    .v-red{ opacity:1; }
+  .pf-card:has(.dot-yellow:hover, .dot-yellow:focus) .v-yellow{ opacity:1; }
+  .pf-card:has(.dot-green:hover,  .dot-green:focus)  .v-green{ opacity:1; }
+  .pf-card:has(.dot-white:hover,  .dot-white:focus)  .v-white{ opacity:1; }
+  .pf-card:has(.dot-purple:hover, .dot-purple:focus) .v-purple{ opacity:1; }
+  .pf-card:has(.dot-orange:hover, .dot-orange:focus) .v-orange{ opacity:1; }
   @media (prefers-reduced-motion: reduce){
-    .pf-tint{ transition:none; }
     .color-dot{ transition:none; }
     .color-dot:hover{ transform:none; }
+    .pf-card .pf-photo{ transition:none; }
   }
 
   .pf-info{ padding:18px 20px; border-top:1px solid var(--line); }
@@ -634,6 +638,51 @@
   .req{ color:var(--zone-red); }
   .form-dark .req{ color:#e08a80; }
   .form-note{ font-size:12px; color:var(--text-soft); }
+
+  /* Валидация: поле с ошибкой + текст подсказки под ним */
+  .field-err input, .field-err textarea{ border-color:var(--zone-red); }
+  .field-err input:focus, .field-err textarea:focus{
+    border-color:var(--zone-red);
+    box-shadow:0 0 0 3px rgba(192,57,43,0.22);
+  }
+  .err-msg{ display:block; font-size:12.5px; color:var(--zone-red); margin-top:5px; }
+  .form-dark .field-err input, .form-dark .field-err textarea{ border-color:#f0a89f; }
+  .form-dark .err-msg{ color:#f0a89f; }
+
+  /* Статус отправки: ошибка сети или запасной канал связи */
+  .form-status{
+    font-size:13.5px; line-height:1.5;
+    border:1px solid var(--zone-red);
+    border-radius:var(--radius);
+    background:rgba(192,57,43,0.07);
+    padding:12px 14px;
+    color:var(--text);
+  }
+  .form-status a{ color:var(--blue); text-decoration:underline; font-weight:500; }
+  .form-dark .form-status{ border-color:#f0a89f; background:rgba(192,57,43,0.18); color:#fff; }
+  .form-dark .form-status a{ color:#fff; }
+
+  /* Успех: форма скрывается, на её месте — подтверждение */
+  .form-success{
+    display:flex; flex-direction:column; gap:10px;
+    border:1px solid var(--green);
+    border-radius:var(--radius);
+    background:#e6f5ec;
+    padding:26px;
+  }
+  .form-success b{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-head); text-transform:uppercase;
+    letter-spacing:.03em; font-size:18px; color:var(--green-dark);
+  }
+  .form-success b svg{ flex:none; }
+  .form-success p{ font-size:14.5px; color:var(--text); }
+  .ct-form-box .form-success{ background:rgba(47,158,92,0.12); border-color:#7fd6a4; }
+  .ct-form-box .form-success b{ color:#7fd6a4; }
+  .ct-form-box .form-success p{ color:rgba(255,255,255,0.85); }
+
+  /* Ловушка для спам-ботов: невидима и вне таб-порядка */
+  .hp-field{ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none; }
 
   /* dark form (в контактах) */
   .form-dark input, .form-dark textarea{
@@ -918,7 +967,7 @@
       Анкувер
     </a>
     <nav class="nav-links">
-      <a href="#services">Услуги</a>
+      <a href="#services">Поставка</a>
       <a href="#categories">Категории</a>
       <a href="#reviews">Отзывы</a>
       <a href="#catalog">Каталог</a>
@@ -934,7 +983,7 @@
   </div>
   <nav class="mobile-menu" id="mobile-menu" aria-label="Мобильное меню">
     <div class="wrap">
-      <a href="#services">Услуги</a>
+      <a href="#services">Поставка</a>
       <a href="#categories">Категории</a>
       <a href="#reviews">Отзывы</a>
       <a href="#catalog">Каталог</a>
@@ -942,12 +991,13 @@
       <a class="mm-phone" href="tel:+70000000000">+7 (000) 000-00-00</a>
     </div>
   </nav>
-  <div class="zone-progress" aria-hidden="true">
-    <span style="background:var(--zone-red)"></span>
-    <span style="background:var(--zone-blue)"></span>
-    <span style="background:var(--zone-green)"></span>
-    <span style="background:var(--zone-yellow)"></span>
-    <span style="background:var(--zone-white)"></span>
+  <div class="mop-progress" aria-hidden="true">
+    <div class="mop-trail">HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP HACCP</div>
+    <svg class="mop-cursor" viewBox="0 0 22 16" fill="none">
+      <line x1="7" y1="1" x2="15" y2="10.5" stroke="#8494a5" stroke-width="2" stroke-linecap="round"/>
+      <rect x="6" y="10.5" width="14" height="4" rx="1.5" fill="var(--blue)"/>
+      <rect x="6.8" y="13.2" width="12.4" height="1.6" rx="0.8" fill="#7fd6a4"/>
+    </svg>
   </div>
 </header>
 
@@ -955,24 +1005,26 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-zonebar"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="hero-zonebar"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="wrap hero-inner">
       <div>
         <div class="eyebrow" style="color:#7fd6a4;">HACCP / ХАССП инвентарь и оборудование</div>
         <h1>Оснащаем пищевые производства <em>под ключ</em></h1>
-        <p class="lead">АНКУВЕР поставляет профессиональный HACCP (ХАССП) инвентарь для уборки с цветовой кодировкой зон — и проводит аудит предприятия, чтобы вы прошли любую проверку.</p>
+        <p class="lead">АНКУВЕР поставляет профессиональный HACCP (ХАССП) инвентарь для уборки с цветовой кодировкой зон — со склада, за 24 часа, с допоставками по графику.</p>
         <div class="hero-actions">
           <a href="#catalog" class="btn btn-green">Получить каталог инвентаря</a>
-          <a href="#services" class="btn btn-ghost">Наши услуги →</a>
+          <a href="#services" class="btn btn-ghost">Как мы работаем →</a>
         </div>
       </div>
       <div class="hero-card">
-        <h2>5-зонная система кодировки</h2>
-        <div class="zone-row"><span class="dot" style="background:var(--zone-red)"></span><b>Красный</b>&nbsp;— зоны высокого риска</div>
-        <div class="zone-row"><span class="dot" style="background:var(--zone-blue)"></span><b>Синий</b>&nbsp;— общие помещения</div>
-        <div class="zone-row"><span class="dot" style="background:var(--zone-green)"></span><b>Зелёный</b>&nbsp;— зоны приготовления</div>
-        <div class="zone-row"><span class="dot" style="background:var(--zone-yellow)"></span><b>Жёлтый</b>&nbsp;— санузлы</div>
-        <div class="zone-row"><span class="dot" style="background:var(--zone-white)"></span><b>Белый</b>&nbsp;— пекарни, кондитерские</div>
+        <h2>7 цветов кодировки ХАССП</h2>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-red)"></span><b>Красный</b>&nbsp;— сырое мясо</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-blue)"></span><b>Синий</b>&nbsp;— рыба и морепродукты</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-yellow)"></span><b>Жёлтый</b>&nbsp;— птица</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-green)"></span><b>Зелёный</b>&nbsp;— овощи и фрукты</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-white)"></span><b>Белый</b>&nbsp;— готовая продукция</div>
+        <div class="zone-row"><span class="dot" style="background:var(--zone-purple)"></span><b>Фиолетовый</b>&nbsp;— аллергены</div>
+        <div class="zone-row"><span class="dot dot-split"></span><b>Оранж. / тёмно-красный</b>&nbsp;— уборка</div>
       </div>
     </div>
   </div>
@@ -981,114 +1033,117 @@
   <section id="services" class="services">
     <div class="wrap">
       <div class="section-head">
-        <div class="eyebrow">Услуги</div>
-        <h2>Два формата работы с предприятием</h2>
-        <p>От разовой поставки до полного сопровождения внедрения системы ХАССП на объекте.</p>
+        <div class="eyebrow">Поставка</div>
+        <h2>Оснащаем объект без простоев</h2>
+        <p>Комплектуем пищевые производства уборочным инвентарём ХАССП — от первой поставки до регулярных допоставок расходников.</p>
       </div>
       <div class="srv-grid">
         <div class="srv-card">
           <div class="srv-icon">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="2.2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="7"/><line x1="17.5" y1="17.5" x2="24" y2="24"/>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9 L14 3 L25 9 L25 19 L14 25 L3 19 Z"/><path d="M3 9 L14 15 L25 9"/><line x1="14" y1="15" x2="14" y2="25"/>
             </svg>
           </div>
-          <h3>Аудит предприятия</h3>
-          <p>Выезжаем на объект, оцениваем текущее состояние уборочного инвентаря и его соответствие требованиям ХАССП.</p>
+          <h3>Поставка инвентаря под ключ</h3>
+          <p>Комплектуем объект полностью: сгоны, щётки, вёдра, скребки, рукоятки и настенные держатели.</p>
           <ul class="srv-list">
-            <li>Карта производственных зон и рисков перекрёстного загрязнения</li>
-            <li>Перечень несоответствий с фотофиксацией</li>
-            <li>Рекомендации по цветовой кодировке под ваш регламент</li>
-            <li>Смета на дооснащение — без навязывания лишнего</li>
+            <li>Подбор комплекта под площадь, зоны и бюджет</li>
+            <li>Инвентарь в 7 цветах HACCP из сертифицированных материалов</li>
+            <li>Отгрузка со склада в течение 24 часов</li>
+            <li>Комплект документов и сертификатов для проверок</li>
           </ul>
         </div>
         <div class="srv-card">
           <div class="srv-icon">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 9 L14 3 L25 9 L25 19 L14 25 L3 19 Z"/><path d="M3 9 L14 15 L25 9"/><line x1="14" y1="15" x2="14" y2="25"/>
+              <path d="M23 14 A9 9 0 1 1 20 7.3"/><path d="M20.5 3.5 L20.5 7.5 L16.5 7.5"/><path d="M14 9.5 L14 14 L17.5 16"/>
             </svg>
           </div>
-          <h3>Поставка инвентаря под ключ</h3>
-          <p>Комплектуем объект полностью: от щёток и мопов до тележек, стеллажей и настенных держателей.</p>
+          <h3>Допоставки по графику</h3>
+          <p>Расходники приезжают по расписанию сами — без напоминаний, заявок и пауз в уборке.</p>
           <ul class="srv-list">
-            <li>Подбор комплекта под площадь, зоны и бюджет</li>
-            <li>Инвентарь в 5 цветах HACCP из сертифицированных материалов</li>
-            <li>Отгрузка со склада в течение 24 часов</li>
-            <li>Регулярные допоставки расходников по графику</li>
+            <li>График допоставок под износ вашего инвентаря</li>
+            <li>Резерв под ваш объект на нашем складе</li>
+            <li>Один поставщик на все шесть категорий</li>
+            <li>Замена позиций без остановки производства</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- AUDIT SCENE -->
-  <section id="audit" class="audit-scene">
+  <!-- ZONING SCENE -->
+  <section id="zoning" class="audit-scene">
     <div class="wrap audit-pin">
       <div class="section-head">
-        <div class="eyebrow" style="color:#7fd6a4;">Аудит</div>
-        <h2>Как мы зонируем предприятие</h2>
-        <p>Прокрутите — и цех разметится по зонам ХАССП прямо на схеме. Именно так выглядит результат нашего аудита.</p>
+        <div class="eyebrow" style="color:#7fd6a4;">Зонирование</div>
+        <h2>Семь цветов ХАССП на карте цеха</h2>
+        <p>Прокрутите — цех разметится по семи цветам кодировки. Так выглядит производство, укомплектованное инвентарём по ХАССП.</p>
       </div>
       <div class="audit-grid">
-        <svg class="audit-plan" viewBox="0 0 520 400" role="img" aria-label="Схема пищевого производства с цветовым зонированием ХАССП">
-          <rect class="plan-wall" x="8" y="8" width="504" height="384" rx="4"/>
-          <rect class="zone-fill zf-red" x="20" y="20" width="210" height="170" fill="var(--zone-red)"/>
-          <rect class="zone-fill zf-green" x="246" y="20" width="246" height="170" fill="var(--zone-green)"/>
-          <rect class="zone-fill zf-blue" x="20" y="206" width="472" height="54" fill="var(--zone-blue)"/>
-          <rect class="zone-fill zf-yellow" x="20" y="276" width="150" height="104" fill="var(--zone-yellow)"/>
-          <rect class="zone-fill zf-white" x="186" y="276" width="170" height="104" fill="var(--zone-white)"/>
-          <rect class="plan-store" x="372" y="276" width="120" height="104"/>
-          <rect class="plan-room" x="20" y="20" width="210" height="170"/>
-          <rect class="plan-room" x="246" y="20" width="246" height="170"/>
-          <rect class="plan-room" x="20" y="206" width="472" height="54"/>
-          <rect class="plan-room" x="20" y="276" width="150" height="104"/>
-          <rect class="plan-room" x="186" y="276" width="170" height="104"/>
-          <rect class="plan-room" x="372" y="276" width="120" height="104"/>
-          <text class="plan-label" x="32" y="42">Разделка сырья</text>
-          <text class="plan-label" x="258" y="42">Горячий цех</text>
-          <text class="plan-label" x="32" y="238">Коридор</text>
-          <text class="plan-label" x="32" y="298">Санузлы</text>
-          <text class="plan-label" x="198" y="298">Кондитерский</text>
-          <text class="plan-label" x="384" y="298">Склад</text>
-          <circle class="zone-dot zd-red" cx="60" cy="120" r="5" fill="var(--zone-red)"/>
-          <circle class="zone-dot zd-red" cx="115" cy="90" r="5" fill="var(--zone-red)"/>
-          <circle class="zone-dot zd-red" cx="170" cy="145" r="5" fill="var(--zone-red)"/>
-          <circle class="zone-dot zd-green" cx="300" cy="100" r="5" fill="var(--zone-green)"/>
-          <circle class="zone-dot zd-green" cx="365" cy="145" r="5" fill="var(--zone-green)"/>
-          <circle class="zone-dot zd-green" cx="430" cy="80" r="5" fill="var(--zone-green)"/>
-          <circle class="zone-dot zd-blue" cx="120" cy="233" r="5" fill="var(--zone-blue)"/>
-          <circle class="zone-dot zd-blue" cx="260" cy="233" r="5" fill="var(--zone-blue)"/>
-          <circle class="zone-dot zd-blue" cx="400" cy="233" r="5" fill="var(--zone-blue)"/>
-          <circle class="zone-dot zd-yellow" cx="62" cy="335" r="5" fill="var(--zone-yellow)"/>
-          <circle class="zone-dot zd-yellow" cx="115" cy="352" r="5" fill="var(--zone-yellow)"/>
-          <circle class="zone-dot zd-white" cx="232" cy="335" r="5" fill="var(--zone-white)"/>
-          <circle class="zone-dot zd-white" cx="290" cy="352" r="5" fill="var(--zone-white)"/>
-          <circle class="zone-dot zd-white" cx="322" cy="318" r="5" fill="var(--zone-white)"/>
+        <svg class="audit-plan" viewBox="0 0 520 420" role="img" aria-label="Схема пищевого производства с семицветным зонированием ХАССП">
+          <rect class="plan-wall" x="8" y="8" width="504" height="404" rx="4"/>
+          <rect class="zone-fill zf-red"     x="20"  y="20"  width="150" height="130" fill="var(--zone-red)"/>
+          <rect class="zone-fill zf-blue"    x="186" y="20"  width="150" height="130" fill="var(--zone-blue)"/>
+          <rect class="zone-fill zf-yellow"  x="352" y="20"  width="140" height="130" fill="var(--zone-yellow)"/>
+          <rect class="zone-fill zf-green"   x="20"  y="166" width="150" height="114" fill="var(--zone-green)"/>
+          <rect class="zone-fill zf-white"   x="186" y="166" width="150" height="114" fill="var(--zone-white)"/>
+          <rect class="zone-fill zf-purple"  x="352" y="166" width="140" height="114" fill="var(--zone-purple)"/>
+          <rect class="zone-fill zf-orange"  x="20"  y="296" width="230" height="104" fill="var(--zone-orange)"/>
+          <rect class="zone-fill zf-darkred" x="266" y="296" width="110" height="104" fill="var(--zone-darkred)"/>
+          <rect class="plan-store" x="392" y="296" width="100" height="104"/>
+          <rect class="plan-room" x="20"  y="20"  width="150" height="130"/>
+          <rect class="plan-room" x="186" y="20"  width="150" height="130"/>
+          <rect class="plan-room" x="352" y="20"  width="140" height="130"/>
+          <rect class="plan-room" x="20"  y="166" width="150" height="114"/>
+          <rect class="plan-room" x="186" y="166" width="150" height="114"/>
+          <rect class="plan-room" x="352" y="166" width="140" height="114"/>
+          <rect class="plan-room" x="20"  y="296" width="230" height="104"/>
+          <rect class="plan-room" x="266" y="296" width="110" height="104"/>
+          <rect class="plan-room" x="392" y="296" width="100" height="104"/>
+          <text class="plan-label" x="32"  y="42">Разделка мяса</text>
+          <text class="plan-label" x="198" y="42">Рыбный цех</text>
+          <text class="plan-label" x="364" y="42">Цех птицы</text>
+          <text class="plan-label" x="32"  y="188">Овощной цех</text>
+          <text class="plan-label" x="198" y="188">Готовая продукция</text>
+          <text class="plan-label" x="364" y="188">Кондитерский</text>
+          <text class="plan-label" x="32"  y="318">Склад и производство</text>
+          <text class="plan-label" x="278" y="318">Санузлы</text>
+          <text class="plan-label" x="404" y="318">Экспедиция</text>
         </svg>
         <div>
           <div class="audit-step">
             <span class="dot" style="background:var(--zone-red)"></span>
-            <div><b>Красная зона — разделка сырья</b><span class="desc">Щётки, скребки и шпатели, закреплённые только за этой зоной</span></div>
+            <div><b>Красный — сырое мясо</b><span class="desc">Говядина, свинина, баранина, дичь. Зона самого высокого микробиологического риска — её инвентарь строго изолируется.</span></div>
           </div>
           <div class="audit-step">
             <span class="dot" style="background:var(--zone-blue)"></span>
-            <div><b>Синяя зона — общие помещения</b><span class="desc">Сгоны и тележки для коридоров и склада</span></div>
-          </div>
-          <div class="audit-step">
-            <span class="dot" style="background:var(--zone-green)"></span>
-            <div><b>Зелёная зона — горячий цех</b><span class="desc">Мопы и вёдра зон приготовления</span></div>
+            <div><b>Синий — рыба и морепродукты</b><span class="desc">Сырая рыба, морепродукты, икра. Запахи, ферменты и чешуя плохо отмываются — направлению выделен собственный цвет.</span></div>
           </div>
           <div class="audit-step">
             <span class="dot" style="background:var(--zone-yellow)"></span>
-            <div><b>Жёлтая зона — санузлы</b><span class="desc">Полностью отдельный комплект уборки</span></div>
+            <div><b>Жёлтый — птица</b><span class="desc">Курица, индейка, утка. Риск сальмонеллы и кампилобактера требует полностью отделить этот поток от мяса и рыбы.</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-green)"></span>
+            <div><b>Зелёный — овощи и фрукты</b><span class="desc">Свежие овощи, зелень, ягоды, фрукты. Комбинаты порой вводят дополнительные оттенки, но семь базовых цветов неизменны.</span></div>
           </div>
           <div class="audit-step">
             <span class="dot" style="background:var(--zone-white)"></span>
-            <div><b>Белая зона — кондитерский участок</b><span class="desc">Пекарский инвентарь из светлого пластика</span></div>
+            <div><b>Белый — готовая продукция</b><span class="desc">Молочные продукты, выпечка, сыры. Тепловой обработки дальше не будет, поэтому контакт с сырьём недопустим.</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot" style="background:var(--zone-purple)"></span>
+            <div><b>Фиолетовый — аллергены</b><span class="desc">Орехи, арахис, соя, глютен. Обязателен в кондитерских и пекарнях: маркировку аллергенов регулирует ТР ТС 022/2011.</span></div>
+          </div>
+          <div class="audit-step">
+            <span class="dot dot-split"></span>
+            <div><b>Оранжевый и тёмно-красный — уборка</b><span class="desc">Оранжевый — производственные помещения и склады, тёмно-красный — исключительно санузлы и бытовые зоны.</span></div>
           </div>
           <div class="audit-final">
-            <span class="audit-badge">Объект готов к проверке</span>
+            <span class="audit-badge">Объект укомплектован</span>
             <p>Комплект под каждую зону — со склада за <b><span id="audit-count">24</span> часа</b></p>
-            <a href="#contacts" class="btn btn-green">Заказать аудит</a>
+            <a href="#contacts" class="btn btn-green">Запросить предложение</a>
           </div>
         </div>
       </div>
@@ -1101,40 +1156,32 @@
       <div class="section-head">
         <div class="eyebrow">Категории</div>
         <h2>Инвентарь по категориям</h2>
-        <p>Восемь групп HACCP (ХАССП) инвентаря — от щёток до стеллажей, каждая в семи расцветках. Наведите на кружок цвета под карточкой — инвентарь на фото перекрасится. Полный каталог с фото, артикулами и ценами — по запросу.</p>
+        <p>Шесть групп HACCP (ХАССП) инвентаря — от сгонов до настенных держателей, каждая в семи цветах кодировки. Наведите на кружок цвета под карточкой — инвентарь на фото сменит расцветку. Полный каталог с артикулами и ценами — по запросу.</p>
       </div>
       <div class="pf-grid">
-        <div class="pf-card cat-brush">
-          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-brush.jpg" alt="Красные щётки и сметки с цветовой кодировкой HACCP" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-brush"></use></svg></div>
-          <div class="pf-info"><b>Щётки и сметки</b><span>Ручные и напольные, жёсткость под задачу</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
-        </div>
         <div class="pf-card cat-squeegee">
-          <div class="pf-img ph-2 has-photo"><img class="pf-photo" src="assets/cat-squeegee.jpg" alt="Синие скребки и сгоны для пищевых поверхностей" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-squeegee"></use></svg></div>
-          <div class="pf-info"><b>Скребки и сгоны</b><span>Для полов, столов и пищевых поверхностей</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-2 has-photo"><img class="pf-photo v-blue" src="assets/cat-squeegee-blue.jpg" alt="Синий сгон для пола на столе из нержавеющей стали" loading="lazy" width="720" height="720"><img class="pf-photo v-red" src="assets/cat-squeegee-red.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-yellow" src="assets/cat-squeegee-yellow.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-green" src="assets/cat-squeegee-green.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-white" src="assets/cat-squeegee-white.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-purple" src="assets/cat-squeegee-purple.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-orange" src="assets/cat-squeegee-orange.jpg" alt="" loading="lazy" width="720" height="720"></div>
+          <div class="pf-info"><b>Сгоны</b><span>Для полов, столов и пищевых поверхностей</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
-        <div class="pf-card cat-mop">
-          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-mop.jpg" alt="Зелёная система влажной уборки: плоский моп и ведро" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-mop"></use></svg></div>
-          <div class="pf-info"><b>Швабры и мопы</b><span>Системы влажной уборки полов</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
-        </div>
-        <div class="pf-card cat-spatula">
-          <div class="pf-img ph-4 has-photo"><img class="pf-photo" src="assets/cat-spatula.jpg" alt="Красные шпатели для очистки ёмкостей и оборудования" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-spatula"></use></svg></div>
-          <div class="pf-info"><b>Шпатели</b><span>Для очистки ёмкостей, столов и оборудования</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+        <div class="pf-card cat-brush">
+          <div class="pf-img ph-1 has-photo"><img class="pf-photo v-blue" src="assets/cat-brush-blue.jpg" alt="Синяя щётка для пола в производственном цехе" loading="lazy" width="720" height="720"><img class="pf-photo v-red" src="assets/cat-brush-red.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-yellow" src="assets/cat-brush-yellow.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-green" src="assets/cat-brush-green.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-white" src="assets/cat-brush-white.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-purple" src="assets/cat-brush-purple.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-orange" src="assets/cat-brush-orange.jpg" alt="" loading="lazy" width="720" height="720"></div>
+          <div class="pf-info"><b>Щётки</b><span>Ручные и напольные, жёсткость под задачу</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
         <div class="pf-card cat-bucket">
-          <div class="pf-img ph-5 has-photo"><img class="pf-photo" src="assets/cat-bucket.jpg" alt="Жёлтые вёдра с мерной шкалой" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-bucket"></use></svg></div>
-          <div class="pf-info"><b>Вёдра и ёмкости</b><span>С мерной шкалой и цветовой маркировкой</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+          <div class="pf-img ph-4 has-photo"><img class="pf-photo v-blue" src="assets/cat-bucket-blue.jpg" alt="Синее мерное ведро на столе из нержавеющей стали" loading="lazy" width="720" height="720"><img class="pf-photo v-red" src="assets/cat-bucket-red.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-yellow" src="assets/cat-bucket-yellow.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-green" src="assets/cat-bucket-green.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-white" src="assets/cat-bucket-white.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-purple" src="assets/cat-bucket-purple.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-orange" src="assets/cat-bucket-orange.jpg" alt="" loading="lazy" width="720" height="720"></div>
+          <div class="pf-info"><b>Вёдра</b><span>Мерные ёмкости с цветовой маркировкой</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
-        <div class="pf-card cat-trolley">
-          <div class="pf-img ph-6 has-photo"><img class="pf-photo" src="assets/cat-trolley.jpg" alt="Уборочная тележка с красным и синим вёдрами" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-trolley"></use></svg></div>
-          <div class="pf-info"><b>Уборочные тележки</b><span>Одно- и двухвёдерные системы с отжимом</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+        <div class="pf-card cat-scraper">
+          <div class="pf-img ph-5 has-photo"><img class="pf-photo v-blue" src="assets/cat-scraper-blue.jpg" alt="Скребок из нержавеющей стали с синей рукояткой" loading="lazy" width="720" height="720"><img class="pf-photo v-red" src="assets/cat-scraper-red.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-yellow" src="assets/cat-scraper-yellow.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-green" src="assets/cat-scraper-green.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-white" src="assets/cat-scraper-white.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-purple" src="assets/cat-scraper-purple.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-orange" src="assets/cat-scraper-orange.jpg" alt="" loading="lazy" width="720" height="720"></div>
+          <div class="pf-info"><b>Скребки</b><span>Для очистки столов, ёмкостей и оборудования</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
-        <div class="pf-card cat-dispenser">
-          <div class="pf-img ph-1 has-photo"><img class="pf-photo" src="assets/cat-dispenser.jpg" alt="Дозирующая система и моющие средства" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-dispenser"></use></svg></div>
-          <div class="pf-info"><b>Дозаторы и химия</b><span>Дозирующие системы для моющих средств</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+        <div class="pf-card cat-handle">
+          <div class="pf-img ph-6 has-photo"><img class="pf-photo v-blue" src="assets/cat-handle-blue.jpg" alt="Алюминиевая рукоятка с синими наконечниками" loading="lazy" width="720" height="720"><img class="pf-photo v-red" src="assets/cat-handle-red.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-yellow" src="assets/cat-handle-yellow.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-green" src="assets/cat-handle-green.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-white" src="assets/cat-handle-white.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-purple" src="assets/cat-handle-purple.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-orange" src="assets/cat-handle-orange.jpg" alt="" loading="lazy" width="720" height="720"></div>
+          <div class="pf-info"><b>Рукоятки</b><span>Алюминиевые, совместимы с любой насадкой</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
-        <div class="pf-card cat-rack">
-          <div class="pf-img ph-3 has-photo"><img class="pf-photo" src="assets/cat-rack.jpg" alt="Настенный держатель с инструментом зелёной зоны" loading="lazy" width="1024" height="768"><span class="pf-tint" aria-hidden="true"></span><svg><use href="#pic-rack"></use></svg></div>
-          <div class="pf-info"><b>Держатели и стеллажи</b><span>Настенные системы хранения по зонам</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
+        <div class="pf-card cat-holder">
+          <div class="pf-img ph-3 has-photo"><img class="pf-photo v-blue" src="assets/cat-holder-blue.jpg" alt="Настенный держатель инвентаря с синими зажимами" loading="lazy" width="720" height="720"><img class="pf-photo v-red" src="assets/cat-holder-red.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-yellow" src="assets/cat-holder-yellow.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-green" src="assets/cat-holder-green.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-white" src="assets/cat-holder-white.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-purple" src="assets/cat-holder-purple.jpg" alt="" loading="lazy" width="720" height="720"><img class="pf-photo v-orange" src="assets/cat-holder-orange.jpg" alt="" loading="lazy" width="720" height="720"></div>
+          <div class="pf-info"><b>Держатели</b><span>Настенные системы хранения по зонам</span><div class="color-row" role="group" aria-label="Доступные цвета"><button type="button" class="color-dot dot-blue" aria-label="Синий"></button><button type="button" class="color-dot dot-red" aria-label="Красный"></button><button type="button" class="color-dot dot-yellow" aria-label="Жёлтый"></button><button type="button" class="color-dot dot-green" aria-label="Зелёный"></button><button type="button" class="color-dot dot-white" aria-label="Белый"></button><button type="button" class="color-dot dot-purple" aria-label="Фиолетовый"></button><button type="button" class="color-dot dot-orange" aria-label="Оранжевый"></button></div></div>
         </div>
       </div>
     </div>
@@ -1152,7 +1199,7 @@
         <div class="rv-card">
           <div class="rv-photo" style="background:rgba(192,57,43,0.25)"><svg><use href="#inv-brush"></use></svg></div>
           <div class="rv-stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
-          <p class="rv-text">«Проходили плановую проверку Роспотребнадзора — к инвентарю ни одного замечания. Цветовая кодировка расставлена по зонам ровно так, как рекомендовал аудит Анкувера.»</p>
+          <p class="rv-text">«Проходили плановую проверку Роспотребнадзора — к инвентарю ни одного замечания. Комплект в Анкувере собрали точно под нашу карту зон, кодировка сошлась один в один.»</p>
           <div class="rv-author"><b>Мясоперерабатывающий цех</b><span>Начальник производства</span></div>
         </div>
         <div class="rv-card">
@@ -1180,17 +1227,19 @@
           <h2>Получите каталог инвентаря</h2>
           <p>Пришлём PDF-каталог с фото, артикулами и ценами на весь ассортимент HACCP (ХАССП) инвентаря — в течение рабочего дня.</p>
         </div>
-        <form action="#" method="post">
+        <form action="#" method="post" data-form="Каталог" data-success="Каталог с фото, артикулами и ценами придёт в течение рабочего дня.">
           <div class="form-row">
             <div>
               <label for="cat-name">Имя <span class="req" aria-hidden="true">*</span></label>
-              <input id="cat-name" name="name" type="text" placeholder="Как к вам обращаться" autocomplete="name" required>
+              <input id="cat-name" name="name" type="text" placeholder="Как к вам обращаться" autocomplete="name" maxlength="80" required>
             </div>
             <div>
               <label for="cat-phone">Телефон или email <span class="req" aria-hidden="true">*</span></label>
-              <input id="cat-phone" name="contact" type="text" placeholder="Куда прислать каталог" required>
+              <input id="cat-phone" name="contact" type="text" placeholder="Куда прислать каталог" maxlength="120" required>
             </div>
           </div>
+          <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="form-status" role="alert" hidden></p>
           <button type="submit" class="btn btn-green">Получить каталог инвентаря</button>
           <span class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</span>
         </form>
@@ -1227,25 +1276,27 @@
         </div>
         <div class="ct-form-box">
           <h3>Запросить коммерческое предложение</h3>
-          <form class="form-dark" action="#" method="post">
+          <form class="form-dark" action="#" method="post" data-form="Коммерческое предложение" data-success="Подготовим коммерческое предложение под ваш объект и свяжемся в течение рабочего дня.">
             <div class="form-row">
               <div>
                 <label for="kp-name">Имя <span class="req" aria-hidden="true">*</span></label>
-                <input id="kp-name" name="name" type="text" placeholder="Как к вам обращаться" autocomplete="name" required>
+                <input id="kp-name" name="name" type="text" placeholder="Как к вам обращаться" autocomplete="name" maxlength="80" required>
               </div>
               <div>
                 <label for="kp-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
-                <input id="kp-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
+                <input id="kp-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" maxlength="25" required>
               </div>
             </div>
             <div>
               <label for="kp-company">Компания / объект</label>
-              <input id="kp-company" name="company" type="text" placeholder="Название организации" autocomplete="organization">
+              <input id="kp-company" name="company" type="text" placeholder="Название организации" autocomplete="organization" maxlength="120">
             </div>
             <div>
               <label for="kp-message">Что нужно оснастить</label>
-              <textarea id="kp-message" name="message" placeholder="Тип производства, площадь, количество зон — всё, что знаете"></textarea>
+              <textarea id="kp-message" name="message" placeholder="Тип производства, площадь, количество зон — всё, что знаете" maxlength="1500"></textarea>
             </div>
+            <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="form-status" role="alert" hidden></p>
             <button type="submit" class="btn btn-green">Получить коммерческое предложение</button>
             <span class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</span>
           </form>
@@ -1263,7 +1314,7 @@
       Анкувер
     </a>
     <div class="footer-links">
-      <a href="#services">Услуги</a>
+      <a href="#services">Поставка</a>
       <a href="#categories">Категории</a>
       <a href="#reviews">Отзывы</a>
       <a href="#contacts">Контакты</a>
@@ -1298,9 +1349,24 @@
       if (e.target.closest('a')) setMenu(false);
     });
     addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false);
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')){
+        setMenu(false);
+        burger.focus();
+      }
     });
   }
+
+  // Фото категорий: если файл не загрузился, карточка откатывается
+  // к градиентной заглушке с векторной иллюстрацией
+  document.querySelectorAll('.pf-photo').forEach(function(img){
+    function drop(){
+      var box = img.closest('.pf-img');
+      img.remove();
+      if (box && !box.querySelector('.pf-photo')) box.classList.remove('has-photo');
+    }
+    if (img.complete && img.naturalWidth === 0) drop();
+    else img.addEventListener('error', drop);
+  });
 
   if (reduce || !('IntersectionObserver' in window)) return;
   document.documentElement.classList.add('anim');
@@ -1332,6 +1398,182 @@
 })();
 </script>
 
+<script>
+(function(){
+  // ===== Отправка форм =====
+  // Куда уходят заявки: вставьте URL приёма — Formspree
+  // («https://formspree.io/f/xxxx»), Web3Forms или свой вебхук.
+  // Пока адрес пуст (или fetch недоступен), форма после проверки полей
+  // предлагает запасной канал: письмо на FALLBACK_EMAIL с уже
+  // заполненной заявкой.
+  var LEAD_ENDPOINT = '';
+  var FALLBACK_EMAIL = 'info@ankuver.ru';
+
+  function digits(v){ return v.replace(/\D/g, ''); }
+  function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+  function setError(field, msg){
+    var box = field.closest('div') || field.parentNode;
+    box.classList.add('field-err');
+    var err = document.createElement('span');
+    err.className = 'err-msg';
+    err.id = field.id + '-err';
+    err.textContent = msg;
+    box.appendChild(err);
+    field.setAttribute('aria-describedby', err.id);
+    field.setAttribute('aria-invalid', 'true');
+    field.dispatchEvent(new Event('invalid')); // Motion-шейк, если движок активен
+  }
+  function clearError(field){
+    var box = field.closest('.field-err');
+    if (!box) return;
+    box.classList.remove('field-err');
+    var err = box.querySelector('.err-msg');
+    if (err) err.remove();
+    field.removeAttribute('aria-describedby');
+    field.removeAttribute('aria-invalid');
+  }
+
+  function validate(form){
+    var bad = [];
+    var name = form.querySelector('[name="name"]');
+    if (name && !name.value.trim()){
+      setError(name, 'Укажите имя — как к вам обращаться.');
+      bad.push(name);
+    }
+    var contact = form.querySelector('[name="contact"]');
+    if (contact){
+      var v = contact.value.trim(), d = digits(v);
+      if (!v){
+        setError(contact, 'Укажите телефон или email — куда прислать каталог.');
+        bad.push(contact);
+      } else if (!isEmail(v) && (d.length < 10 || d.length > 15)){
+        setError(contact, 'Похоже на опечатку: нужен телефон из 10–11 цифр или email.');
+        bad.push(contact);
+      }
+    }
+    var phone = form.querySelector('[name="phone"]');
+    if (phone){
+      var pd = digits(phone.value);
+      if (!phone.value.trim()){
+        setError(phone, 'Укажите телефон — мы перезвоним по нему.');
+        bad.push(phone);
+      } else if (pd.length < 10 || pd.length > 15){
+        setError(phone, 'В номере должно быть 10–11 цифр, например +7 (900) 123-45-67.');
+        bad.push(phone);
+      }
+    }
+    return bad;
+  }
+
+  // Письмо-фолбэк: заявка целиком в теле письма
+  function mailtoHref(form){
+    var subject = 'Заявка с сайта АНКУВЕР: ' + (form.dataset.form || 'форма');
+    var lines = [];
+    form.querySelectorAll('input, textarea').forEach(function(f){
+      if (f.classList.contains('hp-field') || !f.value.trim()) return;
+      var label = form.querySelector('label[for="' + f.id + '"]');
+      var title = label ? label.textContent.replace(/\s*\*\s*$/, '').trim() : f.name;
+      lines.push(title + ': ' + f.value.trim());
+    });
+    return 'mailto:' + FALLBACK_EMAIL +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+
+  function showStatus(form, html){
+    var s = form.querySelector('.form-status');
+    if (!s) return;
+    s.innerHTML = html;
+    s.hidden = false;
+  }
+  function hideStatus(form){
+    var s = form.querySelector('.form-status');
+    if (!s || s.hidden) return;
+    s.hidden = true;
+    s.innerHTML = '';
+  }
+  function fallbackMessage(form, prefix){
+    return prefix + ' Напишите нам на <a href="' + mailtoHref(form) + '">' +
+      FALLBACK_EMAIL + '</a> — письмо с вашей заявкой сформируется автоматически.';
+  }
+
+  function showSuccess(form){
+    var div = document.createElement('div');
+    div.className = 'form-success';
+    div.setAttribute('role', 'status');
+    div.setAttribute('tabindex', '-1');
+    div.innerHTML =
+      '<b><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+      '<circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/>' +
+      '<path d="M6 10.5 L9 13.5 L14 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg>Заявка принята</b>' +
+      '<p></p>';
+    div.querySelector('p').textContent =
+      form.dataset.success || 'Ответим в течение рабочего дня.';
+    form.hidden = true;
+    form.parentNode.insertBefore(div, form);
+    div.focus();
+  }
+
+  document.querySelectorAll('form').forEach(function(form){
+    form.noValidate = true; // без JS остаётся нативная браузерная валидация
+
+    form.addEventListener('input', function(e){
+      if (e.target.matches && e.target.matches('input, textarea')) clearError(e.target);
+      hideStatus(form);
+    });
+
+    var btn = form.querySelector('button[type="submit"]');
+    var btnLabel = btn ? btn.textContent : '';
+    var sending = false;
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (sending) return;
+      hideStatus(form);
+      form.querySelectorAll('input, textarea').forEach(clearError);
+
+      var bad = validate(form);
+      if (bad.length){ bad[0].focus(); return; }
+
+      // Заполненная ловушка = бот: тихо «принимаем» и ничего не шлём
+      var hp = form.querySelector('.hp-field');
+      if (hp && hp.value){ showSuccess(form); return; }
+
+      if (!LEAD_ENDPOINT || !window.fetch){
+        showStatus(form, fallbackMessage(form, 'Онлайн-приём заявок ещё подключается.'));
+        return;
+      }
+
+      sending = true;
+      if (btn){ btn.disabled = true; btn.textContent = 'Отправляем…'; }
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var timer = ctrl && setTimeout(function(){ ctrl.abort(); }, 12000);
+
+      var data = new FormData(form);
+      data.append('form-name', form.dataset.form || '');
+      fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' },
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function(res){
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        showSuccess(form);
+      }).catch(function(){
+        showStatus(form, fallbackMessage(form,
+          'Не получилось отправить — проверьте соединение и попробуйте ещё раз.'));
+      }).then(function(){
+        if (timer) clearTimeout(timer);
+        sending = false;
+        if (btn){ btn.disabled = false; btn.textContent = btnLabel; }
+      });
+    });
+  });
+})();
+</script>
+
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script>
@@ -1340,22 +1582,32 @@
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  // Зонная полоса-прогресс: заполняется от начала до конца страницы
-  var bar = document.querySelector('.zone-progress');
-  if (bar){
-    gsap.to(bar, {
+  // Швабра-прогресс: швабра едет от края до края по мере прокрутки,
+  // «отмывая» за собой повторяющееся слово HACCP
+  var strip = document.querySelector('.mop-progress');
+  if (strip){
+    var trail = strip.querySelector('.mop-trail');
+    var mop = strip.querySelector('.mop-cursor');
+    gsap.set(mop, { opacity: 1 });
+    gsap.to(trail, {
       clipPath: 'inset(0 0% 0 0)',
       ease: 'none',
       scrollTrigger: { start: 0, end: 'max', scrub: 0.3 }
     });
+    gsap.to(mop, {
+      x: function(){ return strip.clientWidth - 26; },
+      ease: 'none',
+      scrollTrigger: { start: 0, end: 'max', scrub: 0.3, invalidateOnRefresh: true }
+    });
   }
 
-  // Pinned-сцена «Аудит цеха»: только на десктопе, на мобильном секция статична
+  // Pinned-сцена «Зонирование цеха»: только на десктопе, на мобильном секция статична
   var mm = gsap.matchMedia();
   mm.add('(min-width: 900px)', function(){
     var scene = document.querySelector('.audit-scene');
     if (!scene) return;
-    var zones = ['red', 'blue', 'green', 'yellow', 'white'];
+    // Семь шагов легенды; последний закрашивает сразу две зоны уборки
+    var zones = ['red', 'blue', 'yellow', 'green', 'white', 'purple', ['orange', 'darkred']];
     var steps = gsap.utils.toArray('.audit-step');
     var fin = scene.querySelector('.audit-final');
     var cntEl = document.getElementById('audit-count');
@@ -1363,7 +1615,6 @@
 
     // Стартовые состояния ставит только JS: без него секция полностью видима
     gsap.set(scene.querySelectorAll('.zone-fill'), { opacity: 0 });
-    gsap.set(scene.querySelectorAll('.zone-dot'), { scale: 0, transformOrigin: '50% 50%' });
     gsap.set(steps, { opacity: 0.35, x: -10 });
     gsap.set(fin, { opacity: 0, y: 14 });
     if (cntEl) cntEl.textContent = '0';
@@ -1371,16 +1622,17 @@
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: scene,
-        start: 'top 76px',
-        end: '+=2400',
+        start: function(){ return 'top ' + document.querySelector('header').offsetHeight; },
+        end: '+=3000',
         pin: true,
         scrub: 0.5
       }
     });
     zones.forEach(function(z, i){
-      tl.to(scene.querySelector('.zf-' + z), { opacity: 0.32, duration: 0.5 }, i)
-        .to(scene.querySelectorAll('.zd-' + z), { scale: 1, duration: 0.3, stagger: 0.08 }, i + 0.1)
-        .to(steps[i], { opacity: 1, x: 0, duration: 0.4 }, i + 0.1);
+      [].concat(z).forEach(function(name){
+        tl.to(scene.querySelector('.zf-' + name), { opacity: 0.32, duration: 0.5 }, i);
+      });
+      tl.to(steps[i], { opacity: 1, x: 0, duration: 0.4 }, i + 0.1);
     });
     tl.to(fin, { opacity: 1, y: 0, duration: 0.6 }, zones.length)
       .to(cnt, {

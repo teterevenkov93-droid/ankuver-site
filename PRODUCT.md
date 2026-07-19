@@ -14,7 +14,7 @@ Food production managers — production chiefs, technologists, and quality/HACCP
 
 ## Product Purpose
 
-АНКУВЕР supplies professional HACCP (ХАССП) color-coded cleaning inventory for the food industry and audits facilities for compliance. The site is a lead-generation landing page; success means a visitor leaves their contact details to receive the PDF catalog. The KP (commercial proposal) request is the hotter, lower-volume secondary conversion.
+АНКУВЕР supplies professional HACCP (ХАССП) color-coded cleaning inventory for the food industry — supply only, no audit services. The site is a lead-generation landing page; success means a visitor leaves their contact details to receive the PDF catalog. The KP (commercial proposal) request is the hotter, lower-volume secondary conversion.
 
 ## Positioning
 
@@ -29,7 +29,7 @@ Speed and stock: everything is in stock and ships within 24 hours, with recurrin
 
 ## Brand Personality
 
-Engineering expert: strict, procedural, industrial. The brand speaks in zones, regulations, and checklists, and should feel like a competent auditor walking the client's facility — precise and confident, never salesy. The 5-color HACCP zone coding is the brand's native vocabulary.
+Engineering expert: strict, procedural, industrial. The brand speaks in zones, regulations, and checklists, and should feel like a competent auditor walking the client's facility — precise and confident, never salesy. The 7-color HACCP zone coding (red, blue, yellow, green, white, purple, orange + dark-red for sanitary cleaning) is the brand's native vocabulary.
 
 ## Anti-references
 
@@ -37,7 +37,7 @@ Not a wholesale price-list site: no cluttered product grids, popups, or «Куп
 
 ## Design Principles
 
-- **Zone coding is language, not decoration.** The 5-color HACCP system appears wherever it carries real meaning (zones, product groups, the logomark) and nowhere else.
+- **Zone coding is language, not decoration.** The 7-color HACCP system appears wherever it carries real meaning (zones, product groups, the logomark) and nowhere else.
 - **Speak like an auditor.** Copy is procedural and concrete — checklists, zone names, regulation terms — because precision itself is the proof of competence.
 - **Prove stock, not promises.** Specific numbers (24 часа, со склада, по графику) and real facility photos over adjectives and stock imagery.
 - **Every ask is zero-risk.** CTAs are framed as no-obligation requests; the visitor gives little and gets the catalog.

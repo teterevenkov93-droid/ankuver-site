@@ -1,6 +1,6 @@
 ---
 name: АНКУВЕР
-description: HACCP (ХАССП) inventory and facility audits for the food industry — zone-coded, engineered, in stock.
+description: HACCP (ХАССП) cleaning inventory supply for the food industry — zone-coded, engineered, in stock.
 colors:
   sanitary-blue: "#14406e"
   sanitary-blue-bright: "#1b5391"
@@ -17,6 +17,10 @@ colors:
   zone-green: "#2f9e5c"
   zone-yellow: "#d6a324"
   zone-white: "#e9e7dd"
+  zone-purple: "#8e44ad"
+  zone-orange: "#d35400"
+  zone-darkred: "#7a2015"
+  error-soft: "#f0a89f"
 typography:
   display:
     fontFamily: "Oswald, sans-serif"
@@ -95,12 +99,12 @@ components:
 
 **Creative North Star: "Карта зон" (The Zone Map)**
 
-The entire system is organized like a facility zone map: everything is coded, legible, and in its place. Five HACCP zone colors (red, blue, green, yellow, white) act as the brand's native vocabulary — they appear as wayfinding wherever zone meaning is real (the legend, product-group chips, the logomark's key teeth) and nowhere else. Around that coded core sits an engineered, procedural frame: condensed uppercase Oswald headings, IBM Plex Mono labels that read like equipment markings, sharp 3px corners, and hairline borders. The whole page should feel the way a facility feels after a passed audit — ordered, inspection-ready, nothing to hide.
+The entire system is organized like a facility zone map: everything is coded, legible, and in its place. Seven HACCP zone colors (red, blue, yellow, green, white, purple, orange — plus dark-red for sanitary cleaning) act as the brand's native vocabulary — they appear as wayfinding wherever zone meaning is real (the legend, product-group chips, the logomark's key teeth) and nowhere else. Around that coded core sits an engineered, procedural frame: condensed uppercase Oswald headings, IBM Plex Mono labels that read like equipment markings, sharp 3px corners, and hairline borders. The whole page should feel the way a facility feels after a passed audit — ordered, inspection-ready, nothing to hide.
 
 This system explicitly rejects the wholesale price-list aesthetic (cluttered product grids, popups, «Купить оптом!» banners) and flashy startup-landing gradients that read unserious to industrial buyers. Density is moderate and disciplined: generous 88px section rhythm, but tight, information-dense modules inside it.
 
 **Key Characteristics:**
-- Five HACCP zone colors used as information, never decoration
+- Seven HACCP zone colors used as information, never decoration
 - Deep Sanitary Blue surfaces alternating with white and washed-blue sections
 - Green reserved for action; every CTA is green
 - Mono uppercase micro-labels as the procedural voice
@@ -108,7 +112,7 @@ This system explicitly rejects the wholesale price-list aesthetic (cluttered pro
 
 ## 2. Colors: The Zone Map Palette
 
-A committed two-color industrial palette (deep blue + action green) with the five-color HACCP zone code as a strictly functional tertiary layer.
+A committed two-color industrial palette (deep blue + action green) with the seven-color HACCP zone code as a strictly functional tertiary layer.
 
 ### Primary
 - **Санитарный синий / Sanitary Blue** (#14406e): the color of detectable food-industry plastic and hygiene zones. Carries the hero, reviews, contacts, and footer as full-bleed surfaces; also headings on light sections and the secondary nav button. **Sanitary Blue Bright** (#1b5391) is its gradient partner and hover state. **Washed Blue** (#eaf1f8) is the light section background that alternates with white.
@@ -117,7 +121,7 @@ A committed two-color industrial palette (deep blue + action green) with the fiv
 - **Action Green** (#2f9e5c): the conversion color. Buttons, list bullets, focus borders, the eyebrow dash. Deepens to **#23824a** on hover. On dark blue surfaces its light companion **Mint Signal** (#7fd6a4) carries small labels and highlighted hero words.
 
 ### Tertiary
-- **HACCP Zone Code** — Red (#c0392b), Blue (#2b6cb0), Green (#2f9e5c), Yellow (#d6a324), White (#e9e7dd): the 5-zone coding system. Appears in the zone legend, the hero zone bar, portfolio zone chips, and the logomark key teeth. These are semantic, regulated colors.
+- **HACCP Zone Code** — Red (#c0392b), Blue (#2b6cb0), Yellow (#d6a324), Green (#2f9e5c), White (#e9e7dd), Purple (#8e44ad), Orange (#d35400) + Dark Red (#7a2015, sanitary-cleaning only): the 7-color coding system. Appears in the zone legend, the hero zone bar, the zoning plan, category color dots, and the logomark key teeth. These are semantic, regulated colors. Dual cleaning zones (orange + dark-red) share one legend row with a split dot (.dot-split).
 
 ### Neutral
 - **Ink** (#16293c): body and heading text on light surfaces.
@@ -126,7 +130,7 @@ A committed two-color industrial palette (deep blue + action green) with the fiv
 - **Paper White** (#ffffff): base background and card surfaces.
 
 ### Named Rules
-**The Zone Rule.** The five HACCP colors may appear only where zone meaning is real: legends, product-group chips, the zone bar, the logomark. Using a zone color as page decoration is prohibited — it corrupts the code the brand sells.
+**The Zone Rule.** The seven HACCP colors may appear only where zone meaning is real: legends, product-group chips, the zone bar, the logomark. Using a zone color as page decoration is prohibited — it corrupts the code the brand sells.
 
 **The One Green Rule.** Green means "act". If an element is green, it is clickable or marks an action path. Never use green for passive decoration.
 
@@ -175,12 +179,12 @@ Engineered and precise: sharp 3px radius everywhere, mono uppercase labels, hair
 ### Zone Legend / Zone Chips (signature)
 - **Legend row:** 13px color dot + bold zone name + description, separated by dashed 16%-alpha white hairlines (dark surfaces).
 - **Zone chip:** 22px circle with 2px white 85%-alpha ring, pinned to portfolio card corners to code product groups.
-- **Zone bar:** 6px five-segment strip (red/blue/green/yellow/white) topping the hero — the zone map in miniature.
+- **Zone bar:** 6px seven-segment strip (red/blue/yellow/green/white/purple/orange) topping the hero — the zone map in miniature.
 
 ### Cards / Containers
 - **Corner Style:** 3px radius
 - **Background:** Paper White on light sections; white at 5–6% alpha on dark blue
-- **Border:** 1px Frost Line (light) / 1px white 14–16% alpha (dark); service cards carry a 4px top border in their category color (blue for audit, green for supply)
+- **Border:** 1px Frost Line (light) / 1px white 14–16% alpha (dark); service cards carry a 4px top border in their category color (blue for turnkey supply, green for scheduled resupply)
 - **Shadow Strategy:** none at rest; hover lift on interactive (portfolio) cards only
 - **Internal Padding:** 26–36px
 
@@ -188,6 +192,8 @@ Engineered and precise: sharp 3px radius everywhere, mono uppercase labels, hair
 - **Style:** white fill, 1px Frost Line border, 3px radius, 12px 14px padding; labels in IBM Plex Mono 11px uppercase above
 - **Focus:** border switches to Action Green with a 3px Action Green 25%-alpha ring (box-shadow); links and buttons get a 2px Action Green `:focus-visible` outline
 - **Dark variant (`form-dark`):** white 4%-alpha fill, white 20%-alpha border, white text, 35%-alpha placeholders
+- **Validation:** an invalid field's border and focus ring switch to Zone Red (#c0392b) with a 12.5px error line below the field; on dark forms both use **Error Soft** (#f0a89f) instead, because Zone Red fails AA on Sanitary Blue. Zone Red here is error semantics (same as the `.req` asterisk), not zone coding.
+- **Submit states:** the button disables and reads «Отправляем…» while in flight (12s timeout); network failures and the not-yet-connected state surface in a red-bordered `.form-status` box that always offers the mailto fallback with the filled-in request; success replaces the form with a green-bordered confirmation («Заявка принята», Oswald + check icon, `role="status"`).
 
 ### Navigation
 - **Style:** sticky white header at 94% opacity with 8px backdrop blur, 1px Frost Line bottom border, 76px tall. Links are IBM Plex Sans 14px/500 in Steel Text, darkening to Sanitary Blue on hover. Mono phone number (`tel:` link) + blue button CTA on the right. Below 900px links collapse into a 44px burger toggle that expands a dropdown panel under the header (grid-rows 0fr→1fr, 280ms; instant under reduced-motion): the five nav links plus the mono phone number, 48px rows separated by dashed Frost Line.
@@ -199,8 +205,8 @@ Engineered and precise: sharp 3px radius everywhere, mono uppercase labels, hair
 
 ### Do:
 - **Do** reserve Action Green (#2f9e5c) for actions — every green element must be clickable or mark the conversion path (The One Green Rule).
-- **Do** use the five HACCP zone colors only where zone meaning is real: legends, chips, the zone bar, the key teeth (The Zone Rule).
-- **Do** treat the category color-row (`.color-dot`, 18px circles under each category card, blue first) as product-color swatches, not zones: the five zone colors plus `--inv-purple` (#8e44ad) and `--inv-orange` (#d35400). The photo's base state is blue; hover/focus on a dot re-hues only the inventory via a `mix-blend-mode: hue` overlay (`.pf-tint`, white swatch = `saturation` desaturation) driven by CSS `:has()` — the neutral photo background never shifts, no JS involved. Category cards carry no zone chips.
+- **Do** use the seven HACCP zone colors only where zone meaning is real: legends, chips, the zone bar, the key teeth (The Zone Rule).
+- **Do** drive the category color-row (`.color-dot`, 18px circles under each category card, blue first) with real photos: every category ships all seven colorways (`assets/cat-{slug}-{color}.jpg`, stacked `.v-*` imgs, blue on top); hover/focus on a dot cross-fades to that colorway via CSS `:has()` — no JS, no blend-mode recoloring. Category cards carry no zone chips.
 - **Do** keep all radii at exactly 3px and all resting borders at 1px — sharpness is the "engineered and precise" signature.
 - **Do** set every small systematic label in IBM Plex Mono uppercase with wide tracking (The Marking Rule).
 - **Do** provide a `prefers-reduced-motion` alternative for every animation, as the logomark and map pin already do.

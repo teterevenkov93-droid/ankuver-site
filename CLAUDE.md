@@ -22,14 +22,14 @@ npx tsc --noEmit                         # typecheck
 
 Windows quirk: `npx remotion add <pkg>` fails with `spawn npm ENOENT` — install packages directly with `npm i --save-exact <pkg>@<remotion-version>` instead, matching the version of `remotion` in package.json.
 
-Category photo generation (`tools/gen-photos.mjs`): `GEMINI_API_KEY=... node tools/gen-photos.mjs` writes 8 photos to `assets/cat-*.png`. Requires a Gemini key **with billing enabled** — free-tier image quota is 0. Manual fallback prompts: `tools/photo-prompts.md`.
+Category photos: source of truth is `Desktop/фото для сайта/` (6 category folders × 7 colorway subfolders with `screen.png`, plus `фон/`). They are converted to `assets/cat-{slug}-{color}.jpg` (720px jpeg) and `assets/bg-facility.jpg` with sharp from `tools/`. Colorway order differs per folder — verify visually before mapping. Legacy generators (`tools/gen-photos.mjs`, `tools/restyle-photo.mjs`) are kept for history.
 
 ## Design system — authoritative sources
 
 `PRODUCT.md` and `DESIGN.md` in the root define brand, audience, and the visual system (North Star: «Карта зон» / The Zone Map). Follow them for any UI change. Core tokens are CSS custom properties at the top of `index.html`:
 
 - Sanitary Blue `#14406e` (primary), Action Green `#2f9e5c` (CTA/accent)
-- HACCP zone colors: `--zone-red/blue/green/yellow/white` — semantic, used for zone coding across the page
+- HACCP zone colors: `--zone-red/blue/yellow/green/white/purple/orange` + `--zone-darkred` (sanitary cleaning) — semantic, used for zone coding across the page
 - Fonts: Oswald (headings) + IBM Plex Sans/Mono (body/data); radius 3px, flat-at-rest
 - The Remotion video (`video/src/theme.ts`) mirrors these tokens — keep them in sync
 
@@ -37,10 +37,10 @@ Category photo generation (`tools/gen-photos.mjs`): `GEMINI_API_KEY=... node too
 
 ## index.html structure
 
-One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*` category illustrations with hover "tool works" animations), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger and Motion 12 (`motion.js`, vanilla build — see the `motion-vanilla-animations` skill) are vendored in `vendor/` (no CDN). Engine ownership: GSAP drives the zone-color scroll progress bar and the pinned scroll scene «Аудит цеха» (`#audit`, desktop-only pin); CSS drives the hero load sequence and card entrances; Motion drives micro-interactions only (button press springs, invalid-field shake) behind an `html.motion` class gate. Never animate the same element's property with two engines. Everything must stay fully readable with JS disabled or `prefers-reduced-motion`.
+One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*`/`inv-*` illustrations, now used only as review-card icons and legacy fallbacks), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger and Motion 12 (`motion.js`, vanilla build — see the `motion-vanilla-animations` skill) are vendored in `vendor/` (no CDN). Engine ownership: GSAP drives the mop scroll-progress strip in the header (a mop "washes in" a repeating HACCP wordmark) and the pinned zoning scene (`#zoning`, desktop-only pin, 7 HACCP colors); CSS drives the hero load sequence and card entrances; Motion drives micro-interactions only (button press springs, invalid-field shake) behind an `html.motion` class gate. Never animate the same element's property with two engines. Everything must stay fully readable with JS disabled or `prefers-reduced-motion`.
 
 ## Known placeholders (intentional, pending)
 
-- Forms post to `#` — leads go nowhere yet
+- Forms: full client pipeline exists (validation with inline Russian errors, honeypot, double-submit lock, 12s timeout, success/error states), but `LEAD_ENDPOINT` in the form script is an empty string — until a real endpoint (Formspree/Web3Forms/webhook) is pasted there, submits fall back to a prefilled `mailto:info@ankuver.ru`
 - Phone number is fake (used in `tel:` links in header, mobile menu, and contacts — replace in all three places)
-- Map block is a styled placeholder (swap for a Yandex/Google Maps iframe)
+- Address in contacts is fake (ул. Примерная); map block is a styled placeholder (swap for a Yandex/Google Maps iframe)
