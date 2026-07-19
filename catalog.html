@@ -77,6 +77,13 @@
   .pc-art{ display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-soft); margin-bottom:3px; }
   .pc-info b{ font-size:13px; font-weight:600; line-height:1.35; color:var(--text); }
 
+  /* Доступные расцветки: статичная индикация, без интерактива */
+  .color-strip{ display:flex; gap:6px; margin-top:9px; }
+  .cs-dot{ width:13px; height:13px; border-radius:50%; border:1px solid rgba(22,41,60,0.18); }
+  .cs-blue{ background:#2b6cb0; } .cs-red{ background:#c0392b; } .cs-yellow{ background:#d6a324; }
+  .cs-green{ background:#2f9e5c; } .cs-white{ background:#e9e7dd; border-color:#c9c6b8; }
+  .cs-purple{ background:#8e44ad; } .cs-orange{ background:#d35400; }
+
   /* Режим «одна категория»: JS вешает mode-single + active */
   body.mode-single .tiles-zone, body.mode-single .cat-block{ display:none; }
   body.mode-single .cat-block.active{ display:block; padding-top:36px; }
@@ -691,27 +698,27 @@
         <div class="prod-grid">
           <div class="prod-card">
             <div class="pc-img"><img src="assets/catalog/buckets/7410.jpg" alt="Ведро 6 л для пищевого производства" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. 7410</span><b>Ведро 6 л для пищевого производства</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. 7410</span><b>Ведро 6 л для пищевого производства</b><span class="color-strip" role="img" aria-label="Доступные цвета: синий, красный, жёлтый, зелёный, белый, фиолетовый, оранжевый"><i class="cs-dot cs-blue" title="Синий"></i><i class="cs-dot cs-red" title="Красный"></i><i class="cs-dot cs-yellow" title="Жёлтый"></i><i class="cs-dot cs-green" title="Зелёный"></i><i class="cs-dot cs-white" title="Белый"></i><i class="cs-dot cs-purple" title="Фиолетовый"></i><i class="cs-dot cs-orange" title="Оранжевый"></i></span></div>
           </div>
           <div class="prod-card">
             <div class="pc-img"><img src="assets/catalog/buckets/7411.jpg" alt="Крышка для ведра 6 л" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. 7411</span><b>Крышка для ведра 6 л</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. 7411</span><b>Крышка для ведра 6 л</b><span class="color-strip" role="img" aria-label="Доступные цвета: синий, красный, жёлтый, зелёный, белый, фиолетовый, оранжевый"><i class="cs-dot cs-blue" title="Синий"></i><i class="cs-dot cs-red" title="Красный"></i><i class="cs-dot cs-yellow" title="Жёлтый"></i><i class="cs-dot cs-green" title="Зелёный"></i><i class="cs-dot cs-white" title="Белый"></i><i class="cs-dot cs-purple" title="Фиолетовый"></i><i class="cs-dot cs-orange" title="Оранжевый"></i></span></div>
           </div>
           <div class="prod-card">
             <div class="pc-img"><img src="assets/catalog/buckets/7420.jpg" alt="Ведро 12 л для пищевого производства" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. 7420</span><b>Ведро 12 л для пищевого производства</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. 7420</span><b>Ведро 12 л для пищевого производства</b><span class="color-strip" role="img" aria-label="Доступные цвета: синий, красный, жёлтый, зелёный, белый, фиолетовый, оранжевый"><i class="cs-dot cs-blue" title="Синий"></i><i class="cs-dot cs-red" title="Красный"></i><i class="cs-dot cs-yellow" title="Жёлтый"></i><i class="cs-dot cs-green" title="Зелёный"></i><i class="cs-dot cs-white" title="Белый"></i><i class="cs-dot cs-purple" title="Фиолетовый"></i><i class="cs-dot cs-orange" title="Оранжевый"></i></span></div>
           </div>
           <div class="prod-card">
             <div class="pc-img"><img src="assets/catalog/buckets/7421.jpg" alt="Крышка для ведра 12 л" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. 7421</span><b>Крышка для ведра 12 л</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. 7421</span><b>Крышка для ведра 12 л</b><span class="color-strip" role="img" aria-label="Доступные цвета: синий, красный, жёлтый, зелёный, белый, фиолетовый, оранжевый"><i class="cs-dot cs-blue" title="Синий"></i><i class="cs-dot cs-red" title="Красный"></i><i class="cs-dot cs-yellow" title="Жёлтый"></i><i class="cs-dot cs-green" title="Зелёный"></i><i class="cs-dot cs-white" title="Белый"></i><i class="cs-dot cs-purple" title="Фиолетовый"></i><i class="cs-dot cs-orange" title="Оранжевый"></i></span></div>
           </div>
           <div class="prod-card">
             <div class="pc-img"><img src="assets/catalog/buckets/7430.jpg" alt="Ведро 20 л для пищевого производства" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. 7430</span><b>Ведро 20 л для пищевого производства</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. 7430</span><b>Ведро 20 л для пищевого производства</b><span class="color-strip" role="img" aria-label="Доступные цвета: синий, красный, жёлтый, зелёный, белый, фиолетовый, оранжевый"><i class="cs-dot cs-blue" title="Синий"></i><i class="cs-dot cs-red" title="Красный"></i><i class="cs-dot cs-yellow" title="Жёлтый"></i><i class="cs-dot cs-green" title="Зелёный"></i><i class="cs-dot cs-white" title="Белый"></i><i class="cs-dot cs-purple" title="Фиолетовый"></i><i class="cs-dot cs-orange" title="Оранжевый"></i></span></div>
           </div>
           <div class="prod-card">
             <div class="pc-img"><img src="assets/catalog/buckets/7431.jpg" alt="Крышка для ведра 20 л" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. 7431</span><b>Крышка для ведра 20 л</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. 7431</span><b>Крышка для ведра 20 л</b><span class="color-strip" role="img" aria-label="Доступные цвета: синий, красный, жёлтый, зелёный, белый, фиолетовый, оранжевый"><i class="cs-dot cs-blue" title="Синий"></i><i class="cs-dot cs-red" title="Красный"></i><i class="cs-dot cs-yellow" title="Жёлтый"></i><i class="cs-dot cs-green" title="Зелёный"></i><i class="cs-dot cs-white" title="Белый"></i><i class="cs-dot cs-purple" title="Фиолетовый"></i><i class="cs-dot cs-orange" title="Оранжевый"></i></span></div>
           </div>
         </div>
       </div>

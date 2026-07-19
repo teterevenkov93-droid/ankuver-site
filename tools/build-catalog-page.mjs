@@ -8,6 +8,21 @@ const data = JSON.parse(fs.readFileSync(ROOT + '/assets/catalog/catalog-data.jso
 const total = data.reduce((s, c) => s + c.items.length, 0);
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Доступные расцветки по категориям: статичная полоска кружков под товаром
+// (только индикация, без интерактива). Ключ — слаг категории.
+const CATEGORY_COLORS = {
+  'buckets': ['blue', 'red', 'yellow', 'green', 'white', 'purple', 'orange'],
+};
+const COLOR_RU = { blue: 'Синий', red: 'Красный', yellow: 'Жёлтый', green: 'Зелёный', white: 'Белый', purple: 'Фиолетовый', orange: 'Оранжевый' };
+const colorStrip = slug => {
+  const colors = CATEGORY_COLORS[slug];
+  if (!colors) return '';
+  return '<span class="color-strip" role="img" aria-label="Доступные цвета: ' +
+    colors.map(c => COLOR_RU[c]).join(', ').toLowerCase() + '">' +
+    colors.map(c => '<i class="cs-dot cs-' + c + '" title="' + COLOR_RU[c] + '"></i>').join('') +
+    '</span>';
+};
+
 const tiles = data.map(c => `      <a class="cat-tile" href="#${c.slug}" data-slug="${c.slug}">
         <span class="ct-img"><img src="${c.items[0].img}" alt="" loading="lazy" width="600" height="600"></span>
         <span class="ct-name">${esc(c.title)}</span>
@@ -24,7 +39,7 @@ const blocks = data.map(c => `    <section class="cat-block" id="${c.slug}">
         <div class="prod-grid">
 ${c.items.map(p => `          <div class="prod-card">
             <div class="pc-img"><img src="${p.img}" alt="${esc(p.name)}" loading="lazy" width="600" height="600"></div>
-            <div class="pc-info"><span class="pc-art">Арт. ${esc(p.art)}</span><b>${esc(p.name)}</b></div>
+            <div class="pc-info"><span class="pc-art">Арт. ${esc(p.art)}</span><b>${esc(p.name)}</b>${colorStrip(c.slug)}</div>
           </div>`).join('\n')}
         </div>
       </div>
@@ -108,6 +123,13 @@ const html = `<!DOCTYPE html>
   .pc-info{ padding:10px 12px 12px; }
   .pc-art{ display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-soft); margin-bottom:3px; }
   .pc-info b{ font-size:13px; font-weight:600; line-height:1.35; color:var(--text); }
+
+  /* Доступные расцветки: статичная индикация, без интерактива */
+  .color-strip{ display:flex; gap:6px; margin-top:9px; }
+  .cs-dot{ width:13px; height:13px; border-radius:50%; border:1px solid rgba(22,41,60,0.18); }
+  .cs-blue{ background:#2b6cb0; } .cs-red{ background:#c0392b; } .cs-yellow{ background:#d6a324; }
+  .cs-green{ background:#2f9e5c; } .cs-white{ background:#e9e7dd; border-color:#c9c6b8; }
+  .cs-purple{ background:#8e44ad; } .cs-orange{ background:#d35400; }
 
   /* Режим «одна категория»: JS вешает mode-single + active */
   body.mode-single .tiles-zone, body.mode-single .cat-block{ display:none; }
