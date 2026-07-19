@@ -39,6 +39,10 @@ Category photos: source of truth is `Desktop/фото для сайта/` (6 cat
 
 One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*`/`inv-*` illustrations, now used only as review-card icons and legacy fallbacks), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger and Motion 12 (`motion.js`, vanilla build — see the `motion-vanilla-animations` skill) are vendored in `vendor/` (no CDN). Engine ownership: GSAP drives the mop scroll-progress strip in the header (a mop "washes in" a repeating HACCP wordmark) and the pinned zoning scene (`#zoning`, desktop-only pin, 7 HACCP colors); CSS drives the hero load sequence and card entrances; Motion drives micro-interactions only (button press springs, invalid-field shake) behind an `html.motion` class gate. Never animate the same element's property with two engines. Everything must stay fully readable with JS disabled or `prefers-reduced-motion`.
 
+## Catalog page
+
+`catalog.html` is GENERATED — do not edit by hand. Source: `assets/catalog/catalog-data.json` (18 categories, 199 items; names scraped from schavon.ru 2026-07-19) + generator `tools/build-catalog-page.mjs`; images built from `Desktop/schavon-images` by `tools/build-catalog.mjs` into `assets/catalog/{slug}/{артикул}.jpg` (600px, white-padded). To change catalog content: edit the JSON (or NAMES in build-catalog.mjs), then `cd tools && node build-catalog-page.mjs`. Category drill-down is JS view-switching over hash routing; without JS the page shows all sections with anchor navigation. Product photos are TEMPORARY (supplier's, schavon.ru) — user plans to replace them.
+
 ## Known placeholders (intentional, pending)
 
 - Forms: full client pipeline exists (validation with inline Russian errors, honeypot, double-submit lock, 12s timeout, success/error states), but `LEAD_ENDPOINT` in the form script is an empty string — until a real endpoint (Formspree/Web3Forms/webhook) is pasted there, submits fall back to a prefilled `mailto:info@ankuver.ru`
