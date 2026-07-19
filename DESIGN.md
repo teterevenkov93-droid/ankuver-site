@@ -186,11 +186,11 @@ Engineered and precise: sharp 3px radius everywhere, mono uppercase labels, hair
 
 ### Inputs / Fields
 - **Style:** white fill, 1px Frost Line border, 3px radius, 12px 14px padding; labels in IBM Plex Mono 11px uppercase above
-- **Focus:** border switches to Action Green, no outline ring
+- **Focus:** border switches to Action Green with a 3px Action Green 25%-alpha ring (box-shadow); links and buttons get a 2px Action Green `:focus-visible` outline
 - **Dark variant (`form-dark`):** white 4%-alpha fill, white 20%-alpha border, white text, 35%-alpha placeholders
 
 ### Navigation
-- **Style:** sticky white header at 94% opacity with 8px backdrop blur, 1px Frost Line bottom border, 76px tall. Links are IBM Plex Sans 14px/500 in Steel Text, darkening to Sanitary Blue on hover. Mono phone number + blue button CTA on the right; links collapse away below 900px.
+- **Style:** sticky white header at 94% opacity with 8px backdrop blur, 1px Frost Line bottom border, 76px tall. Links are IBM Plex Sans 14px/500 in Steel Text, darkening to Sanitary Blue on hover. Mono phone number (`tel:` link) + blue button CTA on the right. Below 900px links collapse into a 44px burger toggle that expands a dropdown panel under the header (grid-rows 0fr→1fr, 280ms; instant under reduced-motion): the five nav links plus the mono phone number, 48px rows separated by dashed Frost Line.
 
 ### Logomark (signature)
 - A key inside a Sanitary Blue tile: white bow and shaft, five teeth in the five zone colors. Teeth glow in a staggered 3.2s cycle; the key rotates −38° on logo hover. Both animations are disabled under `prefers-reduced-motion`.
@@ -200,9 +200,11 @@ Engineered and precise: sharp 3px radius everywhere, mono uppercase labels, hair
 ### Do:
 - **Do** reserve Action Green (#2f9e5c) for actions — every green element must be clickable or mark the conversion path (The One Green Rule).
 - **Do** use the five HACCP zone colors only where zone meaning is real: legends, chips, the zone bar, the key teeth (The Zone Rule).
+- **Do** treat the category color-row (`.color-dot`, 18px circles under each category card) as product-color swatches, not zones: the five zone colors plus `--inv-purple` (#8e44ad) and `--inv-orange` (#d35400). Hover/focus on a dot recolors the category photo via a `mix-blend-mode: color` overlay (`.pf-tint`) driven by CSS `:has()` — no JS.
 - **Do** keep all radii at exactly 3px and all resting borders at 1px — sharpness is the "engineered and precise" signature.
 - **Do** set every small systematic label in IBM Plex Mono uppercase with wide tracking (The Marking Rule).
 - **Do** provide a `prefers-reduced-motion` alternative for every animation, as the logomark and map pin already do.
+- **Do** keep one animation engine per element: GSAP owns scroll scenes, CSS owns entrances, Motion (vanilla, `html.motion` gate) owns micro-interactions — button press springs (`bounce: 0`, damped per the no-overshoot rule), zone-chip pop-in on category cards, invalid-field shake.
 - **Do** keep body text at Ink (#16293c) or Steel Text (#55687c) on white, and white at ≥75% alpha on Sanitary Blue — WCAG AA (4.5:1) is the floor.
 
 ### Don't:

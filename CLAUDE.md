@@ -37,11 +37,10 @@ Category photo generation (`tools/gen-photos.mjs`): `GEMINI_API_KEY=... node too
 
 ## index.html structure
 
-One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*` category illustrations with hover "tool works" animations), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger are vendored in `vendor/` (no CDN). JS powers a zone-color scroll progress bar in the header and a pinned scroll scene «Аудит цеха» (`#audit`) — the pin is desktop-only and the section must stay fully readable with JS disabled or `prefers-reduced-motion`.
+One file, in order: CSS (`<style>`, tokens first), inline SVG `<symbol>` defs (`pic-*` category illustrations with hover "tool works" animations), page sections, then JS at the bottom. GSAP 3.12.5 + ScrollTrigger and Motion 12 (`motion.js`, vanilla build — see the `motion-vanilla-animations` skill) are vendored in `vendor/` (no CDN). Engine ownership: GSAP drives the zone-color scroll progress bar and the pinned scroll scene «Аудит цеха» (`#audit`, desktop-only pin); CSS drives the hero load sequence and card entrances; Motion drives micro-interactions only (button press springs, category zone-chip pop-in, invalid-field shake) behind an `html.motion` class gate. Never animate the same element's property with two engines. Everything must stay fully readable with JS disabled or `prefers-reduced-motion`.
 
 ## Known placeholders (intentional, pending)
 
 - Forms post to `#` — leads go nowhere yet
-- Phone number is fake
-- No mobile menu below 900px
-- `.ph-1..6` gradient backgrounds on category cards stand in for real photos (to land in `assets/cat-*.png`, then be wired into the 8 `.pf-card` elements)
+- Phone number is fake (used in `tel:` links in header, mobile menu, and contacts — replace in all three places)
+- Map block is a styled placeholder (swap for a Yandex/Google Maps iframe)
